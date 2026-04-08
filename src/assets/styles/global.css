@@ -1,13 +1,13 @@
-@import url("../fonts/NotoSansKR/noto-sans-korean.css");
-@import url("../fonts//pretendard/variable/pretendardvariable.css");
+@import url("../fonts/pretendard/variable/pretendardvariable.css");
 
 
 :root {
     /* palette */
+    --skyblue:#F0FAFF;
     --blue: #007AFF;
     --green: #77e90c;
     --lemon: #FFFF00;
-    --white:#fff;
+    --white: #fff;
     --ivory: #fafafa;
     --light-gray: #c9c9c9;
     --mid-gray: #686868;
@@ -15,16 +15,16 @@
 
     /* semantic */
     --color-primary: var(--blue);
-    --color-sub1: var(--green);
+    --color-sub1: var(--skyblue);
     --color-sub2: var(--lemon);
-    --color-bg-header:var(--white);
+    --color-bg-header: var(--white);
     --color-bg: var(--ivory);
     --color-text-main: var(--dark-gray);
     --color-text-sub: var(--mid-gray);
     --color-text-muted: var(--light-gray);
 
     /* typography */
-    --font-size-sm: 0.875rem;
+    --font-size-sm: 0.9rem;
     --font-size-md: 1rem;
     --font-size-lg: 1.25rem;
     --font-size-xl: 1.5rem;
@@ -84,8 +84,7 @@
 
 body {
     min-width: var(--container-min-width);
-    /*font-family: "Noto Sans Korean", "Segoe UI", Roboto, Oxygen;*/
-    font-family:  "Pretendard Variable", "Noto Sans Korean",-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, sans-serif;
+    font-family: "Pretendard Variable", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, sans-serif;
     font-weight: var(--font-semi-bold);
     color: var(--color-text-main);
     background-color: var(--color-bg);
@@ -123,6 +122,15 @@ textarea {
 
 main {
     max-width: var(--container-max-width);
-    margin: 0 auto;
     padding: 0 var(--container-padding);
+    margin: 0 auto;
+}
+
+.vertical-divider {
+    display: inline-block;
+    width: 1px;
+    /* 세로선 두께 */
+    height: 16px;
+    /* 세로선 높이, 버튼 텍스트에 맞춰 조정 */
+    background-color: #ccc;
 }
