@@ -1,0 +1,234 @@
+/*-------------------------------HEADER*/
+header {
+    position: sticky;
+    top: 0;
+    background: var(--color-bg-header);
+    z-index: var(--z-header);
+    border-bottom: 1px solid var(--white-gray);
+}
+
+.header-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 55px;
+}
+
+/*-------------------------------LOGO*/
+.logo {
+    padding: 20px 0;
+    border-bottom: 1px solid var(--white-gray);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo img {
+    max-width: 100px;
+}
+
+/*-------------------------------NAVIGATION*/
+.nav {
+    top: 0;
+    right: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    z-index: var(--z-header);
+    padding: 10px 0;
+    width: 100%;
+}
+
+.nav.open {
+    transform: translateX(0);
+    transition: transform 0.3s ease;
+}
+
+.nav a:hover {
+    color: var(--color-primary);
+}
+
+.menu-container {
+    display: flex;
+    flex-direction: row;
+    gap: 0px;
+}
+
+.menu-container a {
+    display: inline-block;
+    font-weight: var(--font-bold);
+    transition: color 0.2s ease, transform 0.2s ease;
+    margin: 0 1.5rem;
+}
+
+.menu-container li {
+    border-left: 1px solid var(--white-gray);
+}
+
+
+.menu-container li:first-child {
+    border-left: none;
+}
+
+.account-container {
+    display: none;
+}
+
+.account-container a {
+    color: var(--color-text-sub);
+    font-size: var(--font-size-sm);
+    padding: 0 20px;
+    border-left: 1px solid var(--white-gray);
+}
+
+.account-container li:first-child a {
+    border-left: none;
+}
+
+.account-container li a:hover {
+    color: var(--color-primary);
+    transform: translateY(0);
+}
+
+.nav-selected {
+    color: var(--color-primary);
+}
+
+/*-------------------------------HAMBURGER*/
+.hamburger {
+    border: none;
+    cursor: pointer;
+    background: transparent;
+    padding: 0;
+    z-index: var(--z-header);
+    font-size: 20px;
+    color: var(--color-text-sub);
+    position: absolute;
+    right: 1.1rem;
+    top: 1rem;
+}
+
+/*-------------------------------SECONDARY NAVIGATION*/
+.secondary-nav-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    background: var(--color-bg-header);
+    border-bottom: 1px solid #e5e7eb;
+    -webkit-overflow-scrolling: touch;
+}
+
+.secondary-nav {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    min-width: max-content;
+}
+
+.secondary-nav li {
+    list-style: none;
+}
+
+.secondary-nav a {
+    display: inline-block;
+    padding: 8px 14px;
+    border-radius: 9999px;
+    background: #f3f4f6;
+    color: #111827;
+    font-size: 14px;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.secondary-nav a:hover {
+    background: #e5e7eb;
+    transform: translateY(-1px);
+}
+
+.secondary-nav-wrapper::-webkit-scrollbar {
+    height: 6px;
+}
+
+.secondary-nav-wrapper::-webkit-scrollbar-thumb {
+    background: #d1d5db;
+    border-radius: 9999px;
+}
+
+
+/*-------RESPONSIVE-------*/
+@media (min-width: 1024px) {
+
+    /*-------------------------------HEADER*/
+    header {
+        margin: auto;
+        border-bottom: 1px solid var(--white-gray)
+    }
+
+    .header-inner {
+        flex-direction: row;
+        justify-content: space-between;
+        max-width: 1200px;
+        min-height: 65px;
+        padding: 0 100px;
+        margin: 0 auto;
+    }
+
+    /*-------------------------------LOGO*/
+    .logo {
+        left: 0;
+        transform: translateX(0);
+        padding: 0;
+        border-bottom: none;
+        width: auto;
+        border-bottom: none;
+    }
+
+    .logo img {
+        max-width: 110px;
+    }
+
+    /*-------------------------------NAVIGATION*/
+    .nav {
+        position: static;
+        transform: none;
+        height: auto;
+        width: auto;
+        flex-direction: row;
+        justify-content: center;
+        gap: 32px;
+        transition: none;
+        padding: 0;
+        border-bottom: none;
+
+    }
+
+    .nav a:hover {
+        transform: translateY(-3px);
+    }
+
+    .menu-container {
+        flex-direction: row;
+        gap: 32px;
+    }
+
+    .menu-container li {
+        border-left: none;
+    }
+
+    .account-container {
+        display: flex;
+
+        margin-top: 0;
+    }
+
+    /*-------------------------------HAMBURGER*/
+    .hamburger {
+        display: none;
+        position: static;
+    }
+}

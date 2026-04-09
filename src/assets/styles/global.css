@@ -9,6 +9,7 @@
     --lemon: #FFFF00;
     --white: #fff;
     --ivory: #fafafa;
+    --white-gray:#e6ebee;
     --light-gray: #c9c9c9;
     --mid-gray: #686868;
     --dark-gray: #363636;
@@ -18,7 +19,7 @@
     --color-sub1: var(--skyblue);
     --color-sub2: var(--lemon);
     --color-bg-header: var(--white);
-    --color-bg: var(--ivory);
+    --color-bg: var(--white);
     --color-text-main: var(--dark-gray);
     --color-text-sub: var(--mid-gray);
     --color-text-muted: var(--light-gray);
@@ -124,13 +125,4 @@ main {
     max-width: var(--container-max-width);
     padding: 0 var(--container-padding);
     margin: 0 auto;
-}
-
-.vertical-divider {
-    display: inline-block;
-    width: 1px;
-    /* 세로선 두께 */
-    height: 16px;
-    /* 세로선 높이, 버튼 텍스트에 맞춰 조정 */
-    background-color: #ccc;
 }
