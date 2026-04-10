@@ -1,0 +1,115 @@
+/*-------------------------------SIDEMENU TRIGGER*/
+.trigger {
+    position: fixed;
+    top: 10px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    z-index: 1300;
+    border: 1px solid var(--white-gray);
+    border-radius: var(--radius-md);
+    background: var(--white);
+    color: var(--color-text-sub);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.trigger span {
+    width: 22px;
+    height: 2px;
+    background: #222;
+    border-radius: 999px;
+    transition: all 0.3s ease;
+}
+
+.active span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.active span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+/*-------------------------------SIDEMENU*/
+.sideMenu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 250px;
+    height: 100vh;
+    background: #fff;
+    transform: translateX(100%);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    z-index: 1200;
+    padding: 50px 24px 24px;
+    box-sizing: border-box;
+}
+
+.open {
+    transform: translateX(0);
+}
+
+/*-------------------------------SIDEMENU LIST*/
+.menuList {
+    list-style: none;
+    margin: 0;
+    padding-top: 20px;
+}
+
+.menuList li+li {
+    margin-top: 20px;
+}
+
+.menuList a {
+    text-decoration: none;
+    font-size: 16px;
+    color: #222;
+    font-weight: 500;
+}
+
+.menuList a:hover {
+    color: var(--color-primary);
+}
+
+/*-------------------------------OVERLAY*/
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 1100;
+}
+
+.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+/*-------------------------------RESPONSIVE*/
+@media (min-width: 1024px) {
+
+    /*-------------------------------SIDEMENU TRIGGER*/
+    .trigger {
+        display: none;
+    }
+
+    /*-------------------------------SIDEMENU*/
+    .sideMenu {
+        display: none;
+    }
+
+    /*-------------------------------OVERLAY*/
+
+}

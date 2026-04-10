@@ -1,45 +1,50 @@
 import styles from "../Header.module.css";
-import type { MainMenuKey } from "../Header";
+import type { MainMenuKey, SubMenuKey } from "../Header";
 import MenuList from "./MenuList";
 
 interface SecondaryNavigationProps {
-  selectedMenu: MainMenuKey;
-  onItemClick?: () => void;
+  selectedMainMenu: MainMenuKey;
+  onSubMenuChange: (menuKey: SubMenuKey) => void;
 }
 
 const secondaryMenuMap:
-  Record<MainMenuKey, { label: string, href: string }[]> =
+  Record<MainMenuKey, { label: string, menuKey: SubMenuKey }[]> =
 {
   wedding: [
-    { label: "드레스", href: "#" },
-    { label: "부케", href: "#" },
-    { label: "식장", href: "#" },
-    { label: "청첩장", href: "#" },
+    { label: "드레스", menuKey: "dress" },
+    { label: "부케", menuKey: "suit" },
+    { label: "식장", menuKey: "hall" },
+    { label: "청첩장", menuKey: "invite" },
   ],
-  hall: [
-    { label: "실내", href: "#" },
-    { label: "야외", href: "#" },
+  rental: [
+    { label: "실내", menuKey: "outside" },
+    { label: "야외", menuKey: "inside" },
   ],
   community: [
-    { label: "공지사항", href: "#" },
-    { label: "자유게시판", href: "#" },
-    { label: "결혼식구경하기", href: "#" },
-    { label: "정보공유", href: "#" },
+    { label: "공지사항", menuKey: "notice" },
+    { label: "자유게시판", menuKey: "free" },
+    { label: "결혼식구경하기", menuKey: "ceremony" },
+    { label: "정보공유", menuKey: "info" },
   ]
 }
 
-export default function SecondaryNavigation(
-  { selectedMenu, onItemClick }: SecondaryNavigationProps) {
-
-  const items = secondaryMenuMap[selectedMenu] ?? [];
+export default function SecondaryNavigation({
+  selectedMainMenu,
+  onSubMenuChange
+}: SecondaryNavigationProps) {
+  const subMenuItems: { label: string; menuKey: SubMenuKey }[] = secondaryMenuMap[selectedMainMenu] ?? [];
 
   return (
-    <div className={styles["secondary-nav-wrapper"]}>
-      <MenuList items={items}
+    <nav
+      className={styles["secondary-nav-wrapper"]}
+      onClick={(e) => e.stopPropagation()}
+    >
+      <MenuList<SubMenuKey>
         className={styles["secondary-nav"]}
-        onItemClick={onItemClick}
+        items={subMenuItems}
+        onItemClick={(subMenuKey) => { if (subMenuKey) onSubMenuChange(subMenuKey) }}
       />
-    </div>
+    </nav>
 
   );
 }

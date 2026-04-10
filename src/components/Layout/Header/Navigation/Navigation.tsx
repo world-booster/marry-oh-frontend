@@ -3,36 +3,29 @@ import styles from "../Header.module.css";
 import MenuList from "./MenuList";
 
 interface NavigationProps {
-  isNavOpen: boolean;
-  selectedMenu: MainMenuKey;
-  closeNav: () => void;
-  onMenuChange: (menu: MainMenuKey) => void;
+  onMainMenuChange: (menu: MainMenuKey) => void;
 }
 
-const menuItems = [
-  { label: "셀프웨딩", href: "wedding", menuKey: "wedding" },
-  { label: "예식장", href: "#hall", menuKey: "hall" },
-  { label: "커뮤니티", href: "#community", menuKey: "community" },
+const menuItems: { label: string; menuKey: MainMenuKey }[] = [
+  { label: "셀프웨딩", menuKey: "wedding" },
+  { label: "대여", menuKey: "rental" },
+  { label: "커뮤니티", menuKey: "community" },
 ];
 
-
 export default function Navigation({
-  isNavOpen,
-  closeNav,
-  onMenuChange
+  onMainMenuChange
 }: NavigationProps) {
-
-  const handleMenuClick = (menuKey?: string) => {
-    onMenuChange(menuKey as MainMenuKey);
-  }
-
 
   return (
     <nav
-      className={`${styles.nav} ${isNavOpen ? styles.open : ""}`}
+      className={`${styles.nav}`}
       onClick={(e) => e.stopPropagation()}
     >
-      <MenuList className={styles["menu-container"]} items={menuItems} onItemClick={closeNav} />
+      <MenuList<MainMenuKey>
+        className={styles["menu-container"]}
+        items={menuItems}
+        onItemClick={(menuKey) => { if (menuKey) onMainMenuChange(menuKey) }}
+      />
     </nav>
   );
 }

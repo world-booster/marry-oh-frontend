@@ -56,17 +56,17 @@ header {
     gap: 0px;
 }
 
-.menu-container a {
+.menu-container button {
     display: inline-block;
+    color: var(--color-text-main);
     font-weight: var(--font-bold);
     transition: color 0.2s ease, transform 0.2s ease;
     margin: 0 1.5rem;
 }
 
 .menu-container li {
-    border-left: 1px solid var(--white-gray);
+    border-left: 1px solid #f3f5f8;
 }
-
 
 .menu-container li:first-child {
     border-left: none;
@@ -76,38 +76,20 @@ header {
     display: none;
 }
 
-.account-container a {
+.account-container button {
     color: var(--color-text-sub);
     font-size: var(--font-size-sm);
     padding: 0 20px;
     border-left: 1px solid var(--white-gray);
 }
 
-.account-container li:first-child a {
+.account-container li:first-child button {
     border-left: none;
 }
 
-.account-container li a:hover {
+.account-container li button:hover {
     color: var(--color-primary);
     transform: translateY(0);
-}
-
-.nav-selected {
-    color: var(--color-primary);
-}
-
-/*-------------------------------HAMBURGER*/
-.hamburger {
-    border: none;
-    cursor: pointer;
-    background: transparent;
-    padding: 0;
-    z-index: var(--z-header);
-    font-size: 20px;
-    color: var(--color-text-sub);
-    position: absolute;
-    right: 1.1rem;
-    top: 1rem;
 }
 
 /*-------------------------------SECONDARY NAVIGATION*/
@@ -117,7 +99,8 @@ header {
     overflow-y: hidden;
     white-space: nowrap;
     background: var(--color-bg-header);
-    border-bottom: 1px solid #e5e7eb;
+    border-bottom: 1px solid var(--white-gray);
+    text-align: center;
     -webkit-overflow-scrolling: touch;
 }
 
@@ -133,7 +116,7 @@ header {
     list-style: none;
 }
 
-.secondary-nav a {
+.secondary-nav button {
     display: inline-block;
     padding: 8px 14px;
     border-radius: 9999px;
@@ -142,7 +125,6 @@ header {
     font-size: 14px;
     text-decoration: none;
     white-space: nowrap;
-    transition: background 0.2s ease, transform 0.2s ease;
 }
 
 .secondary-nav a:hover {
@@ -204,7 +186,6 @@ header {
         transition: none;
         padding: 0;
         border-bottom: none;
-
     }
 
     .nav a:hover {
@@ -220,9 +201,12 @@ header {
         border-left: none;
     }
 
+    .menu-container button {
+        font-weight: var(--font-bold);
+    }
+
     .account-container {
         display: flex;
-
         margin-top: 0;
     }
 

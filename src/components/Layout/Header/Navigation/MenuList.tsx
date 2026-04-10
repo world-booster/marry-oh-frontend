@@ -1,34 +1,26 @@
-interface MenuItem {
+interface MenuItem<T> {
   label: string;
-  href: string;
-  menuKey?: string;
+  menuKey: T;
 }
 
-interface MenuListProps {
-  items: MenuItem[];
+interface MenuListProps<T> {
+  items: MenuItem<T>[];
   className?: string;
-  onItemClick?: (menuKey?: string) => void;
-  activeKey?: string
+  selectedKey?: T;
+  onItemClick?: (menuKey: T) => void;
 }
 
-export default function MenuList({
+export default function MenuList<T>({
   items,
   className,
-  activeKey,
+  selectedKey,
   onItemClick
-}: MenuListProps) {
-
+}: MenuListProps<T>) {
   return (
     <ul className={className}>
       {items.map((item) => (
         <li key={item.label}>
-          <a
-            href={item.href}
-            onClick={() => onItemClick?.(item.menuKey)}
-            className={activeKey === item.menuKey ? "nav-selected" : ""}
-          >
-            {item.label}
-          </a>
+          <button onClick={() => onItemClick?.(item.menuKey)}>{item.label}</button>
         </li>
       ))}
     </ul>
