@@ -8,9 +8,9 @@ import AccoutPanel from "./Navigation/AccountPanel";
 
 export type MainMenuKey = "wedding" | "rental" | "community";
 export type SubMenuKey =
-  "dress" | "invite" | "hall" | "suit" |
-  "outside" | "inside" |
-  "notice" | "free" | "info" | "ceremony";
+  /*wedding*/    "dress" | "suit" | "bouquet" | "snapshot" | "invite" | "items" |
+  /*rental*/     "studio" | "outside" | "weddingcar" |
+  /*community*/  "notice" | "board" | "ceremony" | "info";
 
 export default function Header() {
   const navRef = useRef<HTMLDivElement | null>(null);
@@ -30,6 +30,7 @@ export default function Header() {
         <div className={styles["header-inner"]} ref={navRef}>
           <Logo />
           <Navigation
+            selectedMainMenu={selectedMainMenu}
             onMainMenuChange={handleMainMenuChange}
           />
           <AccoutPanel />
@@ -37,6 +38,7 @@ export default function Header() {
       </header>
       <SecondaryNavigation
         selectedMainMenu={selectedMainMenu}
+        selectedSubMenu={selectedSubMenu}
         onSubMenuChange={handleSubMenuChange}
       />
     </>

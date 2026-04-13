@@ -24,6 +24,12 @@ header {
     align-items: center;
 }
 
+.logotemp {
+    color: var(--color-primary);
+    font-size: 25px;
+    font-family: 'RixInuaridurine';
+}
+
 .logo img {
     max-width: 100px;
 }
@@ -56,12 +62,17 @@ header {
     gap: 0px;
 }
 
+
 .menu-container button {
     display: inline-block;
     color: var(--color-text-main);
     font-weight: var(--font-bold);
     transition: color 0.2s ease, transform 0.2s ease;
     margin: 0 1.5rem;
+}
+
+.menu-container button.active {
+    color: var(--color-primary);
 }
 
 .menu-container li {
@@ -98,10 +109,32 @@ header {
     overflow-x: auto;
     overflow-y: hidden;
     white-space: nowrap;
-    background: var(--color-bg-header);
-    border-bottom: 1px solid var(--white-gray);
     text-align: center;
+    border-bottom: 1px solid var(--white-gray);
     -webkit-overflow-scrolling: touch;
+    overflow-x: scroll;
+}
+
+.secondary-nav-wrapper::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 30px;
+    height: 100%;
+    background: linear-gradient(to right, white, transparent);
+    pointer-events: none;
+}
+
+.secondary-nav-wrapper::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 30px;
+    height: 100%;
+    background: linear-gradient(to left, white, transparent);
+    pointer-events: none;
 }
 
 .secondary-nav {
@@ -117,20 +150,33 @@ header {
 }
 
 .secondary-nav button {
-    display: inline-block;
-    padding: 8px 14px;
-    border-radius: 9999px;
-    background: #f3f4f6;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    padding: 4px 4px;
+    margin: 0 15px;
     color: #111827;
-    font-size: 14px;
-    text-decoration: none;
+    font-size: 13px;
+    font-weight: var(--font-light);
     white-space: nowrap;
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
 
-.secondary-nav a:hover {
-    background: #e5e7eb;
+.secondary-nav button:hover {
     transform: translateY(-1px);
 }
+
+.secondary-nav button img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    flex-shrink: 0;
+    opacity: 1;
+    transition: opacity 0.2s ease;
+}
+
 
 .secondary-nav-wrapper::-webkit-scrollbar {
     height: 6px;
@@ -148,7 +194,8 @@ header {
     /*-------------------------------HEADER*/
     header {
         margin: auto;
-        border-bottom: 1px solid var(--white-gray)
+        border-bottom: 1px solid var(--white-gray);
+        padding: 8px 0;
     }
 
     .header-inner {
@@ -210,9 +257,24 @@ header {
         margin-top: 0;
     }
 
-    /*-------------------------------HAMBURGER*/
-    .hamburger {
-        display: none;
-        position: static;
+    /*-------------------------------SECONDARY NAVIGATION*/
+    .secondary-nav-wrapper {
+        max-width: 1200px;
+        padding: 0 100px;
+        margin: 0 auto;
+        text-align: center;
+        border-bottom: 0px;
     }
+
+    .secondary-nav button {
+        padding: 8px 14px;
+        font-size: 15px;
+    }
+
+    .secondary-nav button img {
+        width: 45px;
+        height: 45px;
+    }
+
+
 }

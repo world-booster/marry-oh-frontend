@@ -3,6 +3,7 @@ import styles from "../Header.module.css";
 import MenuList from "./MenuList";
 
 interface NavigationProps {
+  selectedMainMenu: MainMenuKey;
   onMainMenuChange: (menu: MainMenuKey) => void;
 }
 
@@ -13,6 +14,7 @@ const menuItems: { label: string; menuKey: MainMenuKey }[] = [
 ];
 
 export default function Navigation({
+  selectedMainMenu,
   onMainMenuChange
 }: NavigationProps) {
 
@@ -24,6 +26,7 @@ export default function Navigation({
       <MenuList<MainMenuKey>
         className={styles["menu-container"]}
         items={menuItems}
+        selectedMenu={selectedMainMenu}
         onItemClick={(menuKey) => { if (menuKey) onMainMenuChange(menuKey) }}
       />
     </nav>

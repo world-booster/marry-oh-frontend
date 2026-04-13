@@ -1,21 +1,38 @@
 @import url("../fonts/pretendard/variable/pretendardvariable.css");
 
+/*LOGOTEMP*/
+@font-face {
+    font-family: 'DungeonFighterOnlineBeatBeat';
+    src: url('//cdn.df.nexon.com/img/common/font/DNFBitBit-Regular.woff'),
+        url('//cdn.df.nexon.com/img/common/font/DNFBitBit-Regular.woff2');
+    font-weight: 400;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'RixInuaridurine';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2207-01@1.0/RixInooAriDuriR.woff2') format('woff2');
+    font-weight: normal;
+    font-display: swap;
+}
 
 :root {
     /* palette */
-    --skyblue:#F0FAFF;
+    --test: #f8007c;
+    --test: #ff7d13;
+    --skyblue: #F0FAFF;
     --blue: #007AFF;
     --green: #77e90c;
     --lemon: #FFFF00;
-    --white: #fff;
+    --white: #ffffff;
     --ivory: #fafafa;
-    --white-gray:#e3e7ee;
+    --white-gray: #f3f5f8;
     --light-gray: #c9c9c9;
     --mid-gray: #686868;
     --dark-gray: #363636;
 
     /* semantic */
-    --color-primary: var(--blue);
+    --color-primary: var(--test);
     --color-sub1: var(--skyblue);
     --color-sub2: var(--lemon);
     --color-bg-header: var(--white);
@@ -125,4 +142,9 @@ main {
     max-width: var(--container-max-width);
     padding: 0 var(--container-padding);
     margin: 0 auto;
+}
+
+button.active {
+    color: var(--color-primary);
+    font-weight: var(--font-bold);
 }
