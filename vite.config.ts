@@ -1,12 +1,17 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
+import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    tsconfigPaths()
+  ],
+
   server: {
     proxy: {
-      "/api": "http://127.0.0.1:5878", // 백엔드 포트에 맞게 수정
+      "/api": "http://127.0.0.1:5878",
     },
-    host: true
+    host: true,
   },
 });

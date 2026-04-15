@@ -14,26 +14,6 @@ header {
     min-height: 55px;
 }
 
-/*-------------------------------LOGO*/
-.logo {
-    padding: 20px 0;
-    border-bottom: 1px solid var(--white-gray);
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.logotemp {
-    color: var(--color-primary);
-    font-size: 25px;
-    font-family: 'RixInuaridurine';
-}
-
-.logo img {
-    max-width: 100px;
-}
-
 /*-------------------------------NAVIGATION*/
 .nav {
     top: 0;
@@ -45,6 +25,7 @@ header {
     z-index: var(--z-header);
     padding: 10px 0;
     width: 100%;
+    border-top: 1px solid var(--white-gray);
 }
 
 .nav.open {
@@ -207,20 +188,6 @@ header {
         margin: 0 auto;
     }
 
-    /*-------------------------------LOGO*/
-    .logo {
-        left: 0;
-        transform: translateX(0);
-        padding: 0;
-        border-bottom: none;
-        width: auto;
-        border-bottom: none;
-    }
-
-    .logo img {
-        max-width: 110px;
-    }
-
     /*-------------------------------NAVIGATION*/
     .nav {
         position: static;
@@ -232,7 +199,7 @@ header {
         gap: 32px;
         transition: none;
         padding: 0;
-        border-bottom: none;
+        border: none;
     }
 
     .nav a:hover {

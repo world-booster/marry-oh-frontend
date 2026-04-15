@@ -1,5 +1,6 @@
 import styles from "./SideMenu.module.css";
 
+
 interface SideMenuTriggerProps {
     isOpen: boolean;
     onClick: () => void;

@@ -1,7 +1,7 @@
 import styles from "./SideMenu.module.css";
 import SideMenuList from "./SideMenuList";
 import Overlay from "./Overlay";
-import Logo from "../Header/Logo";
+import Logo from "../../Logo/Logo";
 
 interface SideMenuProps {
     isOpen: boolean;

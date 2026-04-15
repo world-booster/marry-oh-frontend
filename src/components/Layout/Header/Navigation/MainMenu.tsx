@@ -1,17 +1,12 @@
-import type { MainMenuKey } from "../Header";
-import styles from "../Header.module.css";
-import MenuList from "./MenuList";
+import type { MainMenuKey } from "@/constants/menu";
+import styles from "@/components/Layout/Header/Header.module.css";
+import MenuList from "@/components/Layout/Header/Navigation/MenuList";
+import { menuItems } from "@/constants/menu";
 
 interface NavigationProps {
   selectedMainMenu: MainMenuKey;
   onMainMenuChange: (menu: MainMenuKey) => void;
 }
-
-const menuItems: { label: string; menuKey: MainMenuKey }[] = [
-  { label: "셀프웨딩", menuKey: "wedding" },
-  { label: "대여", menuKey: "rental" },
-  { label: "커뮤니티", menuKey: "community" },
-];
 
 export default function Navigation({
   selectedMainMenu,
@@ -32,4 +27,6 @@ export default function Navigation({
     </nav>
   );
 }
+
+
 
