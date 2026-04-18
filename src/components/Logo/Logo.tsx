@@ -1,13 +1,9 @@
-import "@/assets/styles/global.css";
-import logo from "@/assets/images/logo/logo-text-only.png";
-
-
+import { Link } from "react-router-dom";
 
 export default function Logo() {
   return (
-    <a className="logo" href="#">
-      <div className="logotemp"> MARRYOH!</div>
-      {/*<img src={logo} alt="logo" />*/}
-    </a>
+    <Link to="/" className="logo">
+      <div className="logotemp">MARRYOH!</div>
+    </Link>
   );
 }

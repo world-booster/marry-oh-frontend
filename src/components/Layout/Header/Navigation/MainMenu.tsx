@@ -1,32 +1,35 @@
+import { useNavigate } from "react-router-dom";
 import type { MainMenuKey } from "@/constants/menu";
 import styles from "@/components/Layout/Header/Header.module.css";
 import MenuList from "@/components/Layout/Header/Navigation/MenuList";
-import { menuItems } from "@/constants/menu";
+import { menuMap, mainMenuItems, defaulSubMenuByMain } from "@/constants/menu";
 
-interface NavigationProps {
+interface MainMenuProps {
   selectedMainMenu: MainMenuKey;
-  onMainMenuChange: (menu: MainMenuKey) => void;
 }
 
-export default function Navigation({
-  selectedMainMenu,
-  onMainMenuChange
-}: NavigationProps) {
+export default function MainMenu({ selectedMainMenu }: MainMenuProps) {
+  const navigate = useNavigate();
+  const handleClick = (menuKey: MainMenuKey) => {
+    const defaultSub = defaulSubMenuByMain[menuKey];
+    const item = menuMap[menuKey].subMenus.find(
+      (subMenu) => subMenu.menuKey === defaultSub
+    );
 
+    if (!item) return;
+    navigate(item.path);
+  };
   return (
     <nav
-      className={`${styles.nav}`}
+      className={styles.nav}
       onClick={(e) => e.stopPropagation()}
     >
-      <MenuList<MainMenuKey>
+      <MenuList
         className={styles["menu-container"]}
-        items={menuItems}
+        items={mainMenuItems}
         selectedMenu={selectedMainMenu}
-        onItemClick={(menuKey) => { if (menuKey) onMainMenuChange(menuKey) }}
+        onItemClick={handleClick}
       />
     </nav>
   );
 }
-
-
-

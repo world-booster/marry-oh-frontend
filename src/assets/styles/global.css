@@ -1,4 +1,10 @@
-@import url("../fonts/pretendard/variable/pretendardvariable.css");
+@font-face {
+    font-family: 'Pretendard Variable';
+    font-weight: 45 920;
+    font-style: normal;
+    font-display: swap;
+    src: url('../fonts/pretendard/variable/woff2/PretendardVariable.woff2') format('woff2-variations');
+}
 
 @font-face {
     font-family: 'RixInuaridurine';
@@ -9,23 +15,23 @@
 
 :root {
     /* palette */
-    --test: #ff1313;
-    --test: #f51e1e;
+    --pink: #ff134e;
+    --babypink: #ffb3c5;
     --skyblue: #F0FAFF;
     --blue: #007AFF;
     --green: #77e90c;
     --lemon: #FFFF00;
     --white: #ffffff;
     --ivory: #fafafa;
-    --white-gray: #f3f5f8;
+    --white-gray: #e8edf3;
     --light-gray: #c9c9c9;
     --mid-gray: #686868;
     --dark-gray: #363636;
 
     /* semantic */
-    --color-primary: var(--blue);
-    --color-sub1: var(--skyblue);
-    --color-sub2: var(--lemon);
+    --color-primary-rgb: 255, 19, 78;
+    --color-primary: var(--pink);
+    --color-secondary: var(--babypink);
     --color-bg-header: var(--white);
     --color-bg: var(--white);
     --color-text-main: var(--dark-gray);
@@ -141,12 +147,12 @@ button.active {
 }
 
 :focus {
-  outline: none;
+    outline: none;
 }
 
 :focus-visible {
-  box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.3);
-  border-radius: 6px;
+    box-shadow: 0 0 0 3px rgba(var(--color-primary-rgb), 0.3);
+    border-radius: 6px;
 }
 
 .logo {
@@ -166,6 +172,10 @@ button.active {
     max-width: 100px;
 }
 
+.contents-container {
+    padding:10px;
+}
+
 
 
 @media (min-width: 1024px) {
@@ -179,5 +189,11 @@ button.active {
 
     .logo img {
         max-width: 110px;
+    }
+
+    .contents-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 30px 30px;
     }
 }

@@ -1,0 +1,146 @@
+{
+  "wedding": {
+    "dress": [
+      {
+        "id": 3,
+        "name": "프리미엄 웨딩 드레스",
+        "price": 1200000,
+        "img": "/images/wedding/dress1.jpg"
+      },
+      {
+        "id": 4,
+        "name": "심플 화이트 드레스",
+        "price": 800000,
+        "img": "/images/wedding/dress2.jpg"
+      }
+    ],
+    "suit": [
+      {
+        "id": 5,
+        "name": "클래식 턱시도",
+        "price": 400000,
+        "img": "/images/wedding/suit1.jpg"
+      },
+      {
+        "id": 6,
+        "name": "슬림핏 블랙 턱시도",
+        "price": 500000,
+        "img": "/images/wedding/suit2.jpg"
+      }
+    ],
+    "bouquet": [
+      {
+        "id": 7,
+        "name": "화이트 로즈 부케",
+        "price": 150000,
+        "img": "/images/wedding/bouquet1.jpg"
+      },
+      {
+        "id": 8,
+        "name": "파스텔 믹스 부케",
+        "price": 180000,
+        "img": "/images/wedding/bouquet2.jpg"
+      }
+    ],
+    "invite": [
+      {
+        "id": 9,
+        "name": "프리미엄 청첩장",
+        "price": 200000,
+        "img": "/images/wedding/invite1.jpg"
+      },
+      {
+        "id": 10,
+        "name": "심플 청첩장",
+        "price": 100000,
+        "img": "/images/wedding/invite2.jpg"
+      }
+    ],
+    "items": [
+      {
+        "id": 11,
+        "name": "웨딩 장식 세트",
+        "price": 250000,
+        "img": "/images/wedding/items1.jpg"
+      },
+      {
+        "id": 12,
+        "name": "포토존 소품 패키지",
+        "price": 180000,
+        "img": "/images/wedding/items2.jpg"
+      }
+    ],
+    "snapshot": [
+      {
+        "id": 13,
+        "name": "웨딩 스냅 촬영",
+        "price": 700000,
+        "img": "/images/wedding/snapshot1.jpg"
+      },
+      {
+        "id": 14,
+        "name": "프리미엄 스냅 패키지",
+        "price": 1200000,
+        "img": "/images/wedding/snapshot2.jpg"
+      }
+    ]
+  },
+  "rental": {
+    "home": [
+      {
+        "id": 15,
+        "name": "렌탈 인기 패키지",
+        "price": 300000,
+        "img": "/images/rental/home1.jpg"
+      },
+      {
+        "id": 16,
+        "name": "행사용 렌탈 세트",
+        "price": 250000,
+        "img": "/images/rental/home2.jpg"
+      }
+    ],
+    "studio": [
+      {
+        "id": 17,
+        "name": "스튜디오 촬영 Basic",
+        "price": 500000,
+        "img": "/images/rental/studio1.jpg"
+      },
+      {
+        "id": 18,
+        "name": "스튜디오 촬영 Premium",
+        "price": 800000,
+        "img": "/images/rental/studio2.jpg"
+      }
+    ],
+    "outside": [
+      {
+        "id": 19,
+        "name": "야외 웨딩 장소 대여",
+        "price": 1000000,
+        "img": "/images/rental/outside1.jpg"
+      },
+      {
+        "id": 20,
+        "name": "가든 웨딩 장소",
+        "price": 1500000,
+        "img": "/images/rental/outside2.jpg"
+      }
+    ],
+    "weddingcar": [
+      {
+        "id": 21,
+        "name": "웨딩카 렌탈",
+        "price": 300000,
+        "img": "/images/rental/car1.jpg"
+      },
+      {
+        "id": 22,
+        "name": "럭셔리 웨딩카",
+        "price": 600000,
+        "img": "/images/rental/car2.jpg"
+      }
+    ]
+  }
+}

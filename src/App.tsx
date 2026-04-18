@@ -1,10 +1,8 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import HomePage from "@/pages/Home/HomePage";
-import LoginPage from "@/pages/Login/LoginPage";
-import AboutPage from "@/pages/About/AboutPage";
-import SignupPage from "@/pages/Signup/SignupPage";
 import { Layout } from "@/components/Layout/Layout";
-
+import HomePage from "@/pages/Home/HomePage";
+import PageRouter from "@/pages/PageRouter";
+import { NotFoundPage } from "@/pages/Error/ErrorPages";
 
 export default function App() {
   return (
@@ -12,12 +10,14 @@ export default function App() {
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<HomePage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<SignupPage />} />
+          <Route path="/:main/:sub" element={<PageRouter />} />
         </Route>
+
+
+        <Route path="/not-found" element={<NotFoundPage />} />
+        <Route path="*" element={<NotFoundPage />} />
+
       </Routes>
-      <footer />
     </BrowserRouter>
   );
 }

@@ -1,0 +1,30 @@
+[
+    {
+        "id": 1,
+        "nickname": "신부일기",
+        "title": "야외 스몰웨딩 후기 💍",
+        "img": "/images/home/popular-wedding/popular1.jpg",
+        "viewCount": 12345
+    },
+    {
+        "id": 2,
+        "nickname": "행복한커플",
+        "title": "호텔 웨딩 클래식 진행기",
+        "img": "/images/home/popular-wedding/popular2.jpg",
+        "viewCount": 9870
+    },
+    {
+        "id": 3,
+        "nickname": "제주러버",
+        "title": "제주 감성 웨딩 후기 🌿",
+        "img": "/images/home/popular-wedding/popular3.jpg",
+        "viewCount": 15670
+    },
+    {
+        "id": 4,
+        "nickname": "4월신부",
+        "title": "알뜰 결혼 후기📋",
+        "img": "/images/home/popular-wedding/popular4.jpg",
+        "viewCount": 8900
+    }
+]
