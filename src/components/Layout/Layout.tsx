@@ -2,6 +2,7 @@ import { Outlet } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import Header from "@/components/Layout/Header/Header";
+import Footer from "@/components/Layout/Footer/Footer";
 import SideMenu from "@/components/Layout/SideMenu/SideMenu";
 import SideMenuTrigger from "@/components/Layout/SideMenu/SideMenuTrigger";
 
@@ -34,7 +35,7 @@ export function Layout() {
                 </>
             )}
             <Outlet />
-            <footer />
+            <Footer />
 
         </>
     )

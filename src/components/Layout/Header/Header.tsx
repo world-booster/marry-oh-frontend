@@ -18,7 +18,9 @@ export default function Header() {
     <>
       <header>
         <div className={styles["header-inner"]} ref={navRef}>
-          <Logo />
+          <div className={styles["logo-container"]}>
+            <Logo />
+          </div>
           <MainMenu selectedMainMenu={selectedMainMenu} />
           <AccountMenu />
         </div>

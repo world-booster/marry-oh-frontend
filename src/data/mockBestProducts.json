@@ -3,7 +3,7 @@
     {
       "id": 1,
       "vendor": "라벨르 드레스",
-      "name": "프리미엄 웨딩 드레스",
+      "title": "프리미엄 웨딩 드레스",
       "price": 1200000,
       "img": "/images/home/best-product/dress1.jpg",
       "rating": 4.9,
@@ -12,7 +12,7 @@
     {
       "id": 2,
       "vendor": "라벨르 드레스",
-      "name": "심플 화이트 드레스",
+      "title": "심플 화이트 드레스",
       "price": 800000,
       "img": "/images/home/best-product/dress2.jpg",
       "rating": 4.6,
@@ -21,7 +21,7 @@
     {
       "id": 3,
       "vendor": "엘르 브라이드",
-      "name": "레이스 머메이드 드레스",
+      "title": "레이스 머메이드 드레스",
       "price": 950000,
       "img": "/images/home/best-product/dress3.jpg",
       "rating": 4.8,
@@ -32,7 +32,7 @@
     {
       "id": 7,
       "vendor": "젠틀맨 수트",
-      "name": "클래식 턱시도",
+      "title": "클래식 턱시도",
       "price": 400000,
       "img": "/images/home/best-product/suit1.jpg",
       "rating": 4.7,
@@ -41,7 +41,7 @@
     {
       "id": 8,
       "vendor": "젠틀맨 수트",
-      "name": "슬림핏 블랙 턱시도",
+      "title": "슬림핏 블랙 턱시도",
       "price": 500000,
       "img": "/images/home/best-product/suit2.jpg",
       "rating": 4.8,
@@ -50,7 +50,7 @@
     {
       "id": 9,
       "vendor": "블랙라벨",
-      "name": "화이트 턱시도 세트",
+      "title": "화이트 턱시도 세트",
       "price": 550000,
       "img": "/images/home/best-product/suit3.jpg",
       "rating": 4.5,
@@ -61,7 +61,7 @@
     {
       "id": 13,
       "vendor": "플로라 부케",
-      "name": "핑크 로즈 부케",
+      "title": "핑크 로즈 부케",
       "price": 150000,
       "img": "/images/home/best-product/bouquet1.jpg",
       "rating": 4.8,
@@ -70,7 +70,7 @@
     {
       "id": 14,
       "vendor": "플로라 부케",
-      "name": "화이트 백합 부케",
+      "title": "화이트 백합 부케",
       "price": 180000,
       "img": "/images/home/best-product/bouquet2.jpg",
       "rating": 4.7,
@@ -79,7 +79,7 @@
     {
       "id": 15,
       "vendor": "가든블룸",
-      "name": "화이트 튤립 부케",
+      "title": "화이트 튤립 부케",
       "price": 170000,
       "img": "/images/home/best-product/bouquet3.jpg",
       "rating": 4.6,
@@ -90,7 +90,7 @@
     {
       "id": 20,
       "vendor": "페이퍼하우스",
-      "name": "미니멀 웨딩 청첩장",
+      "title": "미니멀 웨딩 청첩장",
       "price": 80000,
       "img": "/images/home/best-product/invite1.jpg",
       "rating": 4.5,
@@ -99,7 +99,7 @@
     {
       "id": 21,
       "vendor": "페이퍼하우스",
-      "name": "골드 포인트 청첩장",
+      "title": "골드 포인트 청첩장",
       "price": 120000,
       "img": "/images/home/best-product/invite2.jpg",
       "rating": 4.6,
@@ -108,7 +108,7 @@
     {
       "id": 22,
       "vendor": "러브레터",
-      "name": "플라워 디자인 청첩장",
+      "title": "플라워 디자인 청첩장",
       "price": 95000,
       "img": "/images/home/best-product/invite3.jpg",
       "rating": 4.7,
@@ -119,7 +119,7 @@
     {
       "id": 30,
       "vendor": "웨딩샵",
-      "name": "큐빅가득 웨딩슈즈",
+      "title": "큐빅가득 웨딩슈즈",
       "price": 50000,
       "img": "/images/home/best-product/shoes1.jpg",
       "rating": 4.6,
@@ -128,7 +128,7 @@
     {
       "id": 31,
       "vendor": "웨딩샵",
-      "name": "신부를 빛나게 하는 웨딩슈즈",
+      "title": "신부를 빛나게 하는 웨딩슈즈",
       "price": 70000,
       "img": "/images/home/best-product/shoes2.jpg",
       "rating": 4.7,
@@ -137,36 +137,65 @@
     {
       "id": 32,
       "vendor": "메모리즈",
-      "name": "발이 편한 웨딩슈즈",
+      "title": "발이 편한 웨딩슈즈",
       "price": 90000,
       "img": "/images/home/best-product/shoes3.jpg",
       "rating": 4.5,
       "reviewCount": 19
     }
   ],
-  "snapshot": [
+  "catering": [
     {
       "id": 40,
+      "vendor": "힙케이터링",
+      "title": "스몰 웨딩에 적합한 케이터링",
+      "price": 800000,
+      "img": "/images/home/best-product/catering1.jpg",
+      "rating": 4.7,
+      "reviewCount": 19842
+    },
+    {
+      "id": 41,
+      "vendor": "케이터스",
+      "title": "손님들이 만족할만한 케이터링 서비스",
+      "price": 1200000,
+      "img": "/images/home/best-product/catering2.jpg",
+      "rating": 4.7,
+      "reviewCount": 112
+    },
+    {
+      "id": 42,
+      "vendor": "모먼트",
+      "title": "양식뷔페 패키지",
+      "price": 950000,
+      "img": "/images/home/best-product/catering3.jpg",
+      "rating": 4.6,
+      "reviewCount": 10
+    }
+  ],
+  "snapshot": [
+    {
+      "id": 41,
       "vendor": "스냅스튜디오",
-      "name": "웨딩 스냅 촬영",
+      "title": "웨딩 스냅 촬영",
       "price": 800000,
       "img": "/images/home/best-product/snapshot1.jpg",
       "rating": 4.9,
       "reviewCount": 140
     },
     {
-      "id": 41,
+      "id": 42,
       "vendor": "스냅스튜디오",
-      "name": "프리미엄 야외 촬영",
+      "title": "프리미엄 야외 촬영",
       "price": 1200000,
       "img": "/images/home/best-product/snapshot2.jpg",
       "rating": 4.8,
       "reviewCount": 112
     },
     {
-      "id": 42,
+      "id": 43,
       "vendor": "모먼트",
-      "name": "스튜디오 촬영 패키지",
+      "title": "스튜디오 촬영 패키지",
       "price": 950000,
       "img": "/images/home/best-product/snapshot3.jpg",
       "rating": 4.7,

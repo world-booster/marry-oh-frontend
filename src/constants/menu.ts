@@ -16,17 +16,18 @@ export const menuMap = {
             { label: "구두", menuKey: "shoes", path: "/wedding/shoes", img: "/icons/sub-menu/shoes.png" },
             { label: "부케", menuKey: "bouquet", path: "/wedding/bouquet", img: "/icons/sub-menu/bouquet.png" },
             { label: "청첩장", menuKey: "invite", path: "/wedding/invite", img: "/icons/sub-menu/wedding-invitation.png" },
-            { label: "스냅샷", menuKey: "snapshot", path: "/wedding/snapshot", img: "/icons/sub-menu/snapshot.png" },
         ],
     },
     rental: {
-        label: "대여",
+        label: "렌탈",
         type: "product",
         subMenus: [
             { label: "홈", menuKey: "home", path: "/rental/home", img: "/icons/sub-menu/home.png" },
             { label: "스튜디오", menuKey: "studio", path: "/rental/studio", img: "/icons/sub-menu/studio.png" },
             { label: "야외식장", menuKey: "outside", path: "/rental/outside", img: "/icons/sub-menu/outside.png" },
+            { label: "케이터링", menuKey: "catering", path: "/wedding/catering", img: "/icons/sub-menu/catering.png" },
             { label: "웨딩카", menuKey: "weddingcar", path: "/rental/weddingcar", img: "/icons/sub-menu/weddingcar.png" },
+            { label: "촬영/영상", menuKey: "snapshot", path: "/wedding/snapshot", img: "/icons/sub-menu/snapshot.png" },
         ],
     },
     community: {
