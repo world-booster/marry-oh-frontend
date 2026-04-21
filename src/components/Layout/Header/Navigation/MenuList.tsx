@@ -5,7 +5,7 @@ interface MenuItem<T> {
 }
 
 interface MenuListProps<T> {
-  items: MenuItem<T>[];
+  items: readonly MenuItem<T>[];
   className?: string;
   selectedMenu?: T;
   onItemClick?: (menuKey: T) => void;

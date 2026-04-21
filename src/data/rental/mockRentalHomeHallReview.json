@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "nickname": "로맨틱데이",
+    "title": "호텔 웨딩홀 진행 후기 ✨",
+    "img": "/images/rental-home/weddinghall-review/hall1.jpg",
+    "viewCount": 14230
+  },
+  {
+    "id": 2,
+    "nickname": "야외웨딩러버",
+    "title": "가든 웨딩홀 감성 후기 🌿",
+    "img": "/images/rental-home/weddinghall-review/hall2.jpg",
+    "viewCount": 11890
+  },
+  {
+    "id": 3,
+    "nickname": "심플웨딩",
+    "title": "하우스 웨딩홀 소규모 예식 후기 💍",
+    "img": "/images/rental-home/weddinghall-review/hall3.jpg",
+    "viewCount": 9650
+  },
+  {
+    "id": 4,
+    "nickname": "럭셔리신부",
+    "title": "대형 컨벤션 웨딩홀 후기 👰",
+    "img": "/images/rental-home/weddinghall-review/hall4.jpg",
+    "viewCount": 17320
+  }
+]

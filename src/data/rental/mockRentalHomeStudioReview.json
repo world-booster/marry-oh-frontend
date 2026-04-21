@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "nickname": "감성커플",
+    "title": "내추럴 스튜디오 촬영 후기 🌿",
+    "img": "/images/rental-home/studio-review/studio1.jpg",
+    "viewCount": 13420
+  },
+  {
+    "id": 2,
+    "nickname": "빛나는우리",
+    "title": "화이트톤 스튜디오 촬영 완전 만족✨",
+    "img": "/images/rental-home/studio-review/studio2.jpg",
+    "viewCount": 9820
+  },
+  {
+    "id": 3,
+    "nickname": "제주쀼",
+    "title": "자연친화스튜디오✨",
+    "img": "/images/rental-home/studio-review/studio3.jpg",
+    "viewCount": 1325
+  }
+]

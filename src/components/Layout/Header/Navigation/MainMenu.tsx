@@ -15,7 +15,7 @@ export default function MainMenu({ selectedMainMenu }: MainMenuProps) {
     const item = menuMap[menuKey].subMenus.find(
       (subMenu) => subMenu.menuKey === defaultSub
     );
-
+    
     if (!item) return;
     navigate(item.path);
   };
@@ -25,7 +25,7 @@ export default function MainMenu({ selectedMainMenu }: MainMenuProps) {
       onClick={(e) => e.stopPropagation()}
     >
       <MenuList
-        className={styles["menu-container"]}
+        className={styles.menuContainer}
         items={mainMenuItems}
         selectedMenu={selectedMainMenu}
         onItemClick={handleClick}

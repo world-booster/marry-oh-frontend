@@ -10,9 +10,8 @@ export default function App() {
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<HomePage />} />
-          <Route path="/:main/:sub" element={<PageRouter />} />
+          <Route path="/:main/*" element={<PageRouter />} />
         </Route>
-
 
         <Route path="/not-found" element={<NotFoundPage />} />
         <Route path="*" element={<NotFoundPage />} />

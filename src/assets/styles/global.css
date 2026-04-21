@@ -171,7 +171,7 @@ button.active {
     max-width: 100px;
 }
 
-.contents-container {
+.contentsContainer {
     padding:10px;
 }
 
@@ -190,7 +190,7 @@ button.active {
         max-width: 110px;
     }
 
-    .contents-container {
+    .contentsContainer {
         max-width: 1200px;
         margin: 0 auto;
         padding: 30px 30px;

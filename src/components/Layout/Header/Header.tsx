@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useRef } from "react";
 import styles from "@/components/Layout/Header/Header.module.css";
 import Logo from "@/components/Logo/Logo";
@@ -9,16 +9,16 @@ import type { MainMenuKey, SubMenuKey } from "@/constants/menu";
 
 export default function Header() {
   const navRef = useRef<HTMLDivElement | null>(null);
-
-  const { main, sub } = useParams();
-
+  const { pathname } = useLocation();
+  const segments = pathname.split("/").filter(Boolean);
+  const [main, sub] = segments;
   const selectedMainMenu = (main ?? "wedding") as MainMenuKey;
   const selectedSubMenu = (sub ?? "home") as SubMenuKey;
   return (
     <>
       <header>
-        <div className={styles["header-inner"]} ref={navRef}>
-          <div className={styles["logo-container"]}>
+        <div className={styles.headInner} ref={navRef}>
+          <div className={styles["logoContainer"]}>
             <Logo />
           </div>
           <MainMenu selectedMainMenu={selectedMainMenu} />

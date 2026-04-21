@@ -1,26 +1,26 @@
 import { useState, useRef, useLayoutEffect } from "react";
 import "@/assets/styles/global.css";
 import { menuMap } from "@/constants/menu";
-import styles from "@/pages/Home/Homapage.module.css";
+import styles from "@/pages/Home/RentalHomapage.module.css";
 import bannerData from "@/data/wedding/mockBanner.json";
 import bestProducts from "@/data/wedding/mockBestProducts.json";
-import popularWeddings from "@/data/wedding/mockPopularWedding.json";
-import weddingTips from "@/data/wedding/mockWeddingTips.json";
+import studioReview from "@/data/rental/mockRentalHomeStudioReview.json";
+import hallReview from "@/data/rental/mockRentalHomeHallReview.json";
 
-export default function HomePage() {
-  const banner = bannerData.banners[0];
+export default function RentalHomePage() {
+  const banner = bannerData.banners[1];
 
   /* 베스트 카테고리 */
-  const defaultCategory = menuMap.wedding.subMenus.find(sub => "children" in sub)?.children?.[0]?.id ?? "";
+  const categories = menuMap.rental.subMenus.filter((sub) => sub.menuKey !== "home");
+  const defaultCategory = categories[0]?.menuKey ?? "";
   const [selectedBestCategory, setSelectedBestCategory] = useState<string>(defaultCategory);
-  const categories = menuMap.wedding.subMenus.flatMap(sub => "children" in sub ? [...sub.children] : []);
   const filteredProducts = bestProducts[selectedBestCategory as keyof typeof bestProducts] || [];
 
   /* 베스트 카테고리 PC버전 가로 이동 화살표 */
   const scrollRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
-  
+
   const checkScroll = () => {
     if (!scrollRef.current) return;
     const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
@@ -45,19 +45,18 @@ export default function HomePage() {
   return (
     <div className="contentsContainer">
       {/* HERO */}
-      {/*<section className={styles.hero} style={{ backgroundImage: `url(${banner.imageUrl})` }}> */}
-      <section className={styles.hero}>
+      <section className={styles.hero} style={{ backgroundImage: `url(${banner.imageUrl})` }}>
+      {/* <section className={styles.hero}> */}
         <h1>{banner.title}</h1>
         <p>{banner.description}</p>
-        <button>지금 시작하기</button>
       </section>
 
 
-      {/* POPULAR WEDDINGS */}
+      {/* STUDIO REVIEW */}
       <section>
-        <h2>인기 웨딩 구경하기</h2>
-        <div className={styles.popularList}>
-          {popularWeddings.map((item) => (
+        <h2>스튜디오 촬영후기</h2>
+        <div className={styles.CardGridPc3Mobile3}>
+          {studioReview.map((item) => (
             <div key={item.id} className={styles.card}>
               {/* 이미지 */}
               <div className={styles.coverImage}>
@@ -77,20 +76,22 @@ export default function HomePage() {
       </section>
 
 
-      {/* WEDDING TIPS*/}
+      {/* WEDDINGHALL REVIEW */}
       <section>
-        <h2>결혼식 꿀팁</h2>
-        <div className={styles.weddingTipList}>
-          {weddingTips.map((item) => (
-            /*<div key={item.id} className={styles.card}>*/
-            <div key={item.id} className={`${styles.card} ${styles.weddingTipCard}`}>
-              <div className={`${styles.highlight} ${styles.contentTitle}`}>{item.title}</div>
+        <h2>예식장 후기</h2>
+        <div className={styles.CardGridPc4Mobile2}>
+          {hallReview.map((item) => (
+            <div key={item.id} className={styles.card}>
+              {/* 이미지 */}
+              <div className={styles.coverImage}>
+                <img src={item.img} alt={item.title} className={styles.image} />
+              </div>
+              {/* 정보 */}
               <div className={styles.meta}>
-                <div className={styles.content}>{item.content}</div>
-                <span className={styles.subTitle}>{item.nickname}</span>
+                <span className={styles.subTitle}> {item.nickname} </span>
+                <div className={styles.title}>{item.title}</div>
                 <div className={styles.review}>
                   <span className={styles.count}>조회수 {item.viewCount.toLocaleString()}</span>
-                  <span className={styles.count}>댓글 {item.replyCount.toLocaleString()}</span>
                 </div>
               </div>
             </div>
@@ -100,7 +101,8 @@ export default function HomePage() {
 
 
 
-    {/* BEST PRODUCTS */}
+
+      {/* BEST PRODUCTS */}
       <section className={styles.products}>
         <h2>베스트</h2>
         <div className={styles.categoryWrapper}>
@@ -115,9 +117,9 @@ export default function HomePage() {
           <div ref={scrollRef} className={styles.categoryRow} onScroll={checkScroll}>
             {categories.map((menu) => (
               <button
-                key={menu.id}
-                className={selectedBestCategory === menu.id ? styles.active : ""}
-                onClick={() => setSelectedBestCategory(menu.id)}
+                key={menu.menuKey}
+                className={selectedBestCategory === menu.menuKey ? styles.active : ""}
+                onClick={() => setSelectedBestCategory(menu.menuKey)}
               >
                 {menu.label}
               </button>
@@ -134,10 +136,10 @@ export default function HomePage() {
 
 
         {/* 상품 리스트 */}
-        <div className={styles.productList}>
+        <div className={styles.CardGrid3Columns}>
           {filteredProducts.map((product) => (
             <div key={product.id} className={styles.card}>
-              <div className={styles["coverImage"]}>
+              <div className={styles.coverImage}>
                 <img src={product.img} alt={product.title} className={styles.image} />
               </div>
               <div className={styles.meta}>

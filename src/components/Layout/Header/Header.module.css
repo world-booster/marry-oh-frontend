@@ -7,14 +7,14 @@ header {
     border-bottom: 1px solid var(--white-gray);
 }
 
-.header-inner {
+.headInner {
     display: flex;
     flex-direction: column;
     align-items: center;
     min-height: 55px;
 }
 
-.logo-container{
+.logoContainer {
     padding: 10px 0;
 }
 
@@ -37,13 +37,13 @@ header {
     transition: transform 0.3s ease;
 }
 
-.menu-container {
+.menuContainer {
     display: flex;
     flex-direction: row;
     gap: 0px;
 }
 
-.menu-container button {
+.menuContainer button {
     display: inline-block;
     color: var(--color-text-main);
     font-weight: var(--font-bold);
@@ -51,44 +51,44 @@ header {
     margin: 0 1.5rem;
 }
 
-.menu-container button:hover {
+.menuContainer button:hover {
     color: var(--color-primary);
 }
 
-.menu-container button.active {
+.menuContainer button.active {
     color: var(--color-primary);
 }
 
-.menu-container li {
+.menuContainer li {
     border-left: 1px solid #f3f5f8;
 }
 
-.menu-container li:first-child {
+.menuContainer li:first-child {
     border-left: none;
 }
 
-.account-container {
+.accountContainer {
     display: none;
 }
 
-.account-container button {
+.accountContainer button {
     color: var(--color-text-sub);
     font-size: var(--font-size-sm);
     padding: 0 20px;
     border-left: 1px solid var(--white-gray);
 }
 
-.account-container li:first-child button {
+.accountContainer li:first-child button {
     border-left: none;
 }
 
-.account-container li button:hover {
+.accountContainer li button:hover {
     color: var(--color-primary);
     transform: translateY(0);
 }
 
 /*-------------------------------SECONDARY NAVIGATION*/
-.secondary-nav-wrapper {
+.subMenuWrapper {
     width: 100%;
     overflow-x: auto;
     overflow-y: hidden;
@@ -99,7 +99,7 @@ header {
     overflow-x: scroll;
 }
 
-.secondary-nav {
+.subMenuNav {
     display: inline-flex;
     align-items: center;
     gap: 10px;
@@ -107,11 +107,11 @@ header {
     min-width: max-content;
 }
 
-.secondary-nav li {
+.subMenuNav li {
     list-style: none;
 }
 
-.secondary-nav button {
+.subMenuNav button {
     display: inline-flex;
     flex-direction: column;
     align-items: center;
@@ -126,11 +126,11 @@ header {
     transition: all 0.2s ease;
 }
 
-.secondary-nav button:hover {
+.subMenuNav button:hover {
     transform: translateY(-1px);
 }
 
-.secondary-nav button img {
+.subMenuNav button img {
     width: 40px;
     height: 40px;
     object-fit: contain;
@@ -139,11 +139,11 @@ header {
     transition: opacity 0.2s ease;
 }
 
-.secondary-nav-wrapper::-webkit-scrollbar {
+.subMenuWrapper::-webkit-scrollbar {
     height: 6px;
 }
 
-.secondary-nav-wrapper::-webkit-scrollbar-thumb {
+.subMenuWrapper::-webkit-scrollbar-thumb {
     background: #d1d5db;
     border-radius: 9999px;
 }
@@ -159,7 +159,7 @@ header {
         padding: 8px 0;
     }
 
-    .header-inner {
+    .headInner {
         flex-direction: row;
         justify-content: space-between;
         max-width: 1200px;
@@ -186,35 +186,36 @@ header {
         transform: translateY(-3px);
     }
 
-    .menu-container {
+    .menuContainer {
         flex-direction: row;
         gap: 32px;
     }
 
-    .menu-container li {
+    .menuContainer li {
         border-left: none;
     }
 
-    .menu-container button {
+    .menuContainer button {
         font-weight: var(--font-bold);
     }
 
-    .account-container {
+    .accountContainer {
         display: flex;
         margin-top: 0;
     }
 
     /*-------------------------------SECONDARY NAVIGATION*/
-    .secondary-nav-wrapper {
+    .subMenuWrapper {
         text-align: center;
+        padding: 5px 0px 0px 0px;
     }
 
-    .secondary-nav button {
+    .subMenuNav button {
         padding: 3px 14px;
         font-size: 15px;
     }
 
-    .secondary-nav button img {
+    .subMenuNav button img {
         width: 45px;
         height: 45px;
     }

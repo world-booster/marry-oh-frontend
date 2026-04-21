@@ -16,7 +16,6 @@ export default function SubMenu({
 
   const navigate = useNavigate();
   const subMenuItems = menuMap[selectedMainMenu].subMenus;
-
   const handleClick = (subMenuKey: SubMenuKey) => {
     const item = subMenuItems.find(
       (menu) => menu.menuKey === subMenuKey
@@ -29,11 +28,11 @@ export default function SubMenu({
 
   return (
     <nav
-      className={styles["secondary-nav-wrapper"]}
+      className={styles.subMenuWrapper}
       onClick={(e) => e.stopPropagation()}
     >
       <MenuList
-        className={styles["secondary-nav"]}
+        className={styles["subMenuNav"]}
         items={subMenuItems}
         selectedMenu={selectedSubMenu}
         onItemClick={handleClick}

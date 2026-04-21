@@ -6,7 +6,7 @@ export default function AccoutPanel() {
 
   return (
     <>
-      <MenuList className={styles["account-container"]} items={accountItems} />
+      <MenuList className={styles.accountContainer} items={accountItems} />
     </>
   );
 }
