@@ -1,21 +1,3 @@
-/*-------------------------------COMMON*/
-section {
-  margin-bottom: 60px;
-}
-
-section h2 {
-  font-size: 18px;
-  margin-bottom: 10px;
-  margin-left: 3px;
-}
-
-section>div {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 12px;
-  overflow-x: auto;
-}
-
 /*-------------------------------HERO*/
 .hero {
   position: relative;
@@ -28,20 +10,16 @@ section>div {
   overflow: hidden;
   height: 220px;
   color: var(--white);
-  /* background: linear-gradient(135deg, #fff1f5 0%, #f6f1f8 100%); */
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 50% 70%;
-  /* 🔥 모바일은 얼굴 잘 안잘리게 */
 }
 
 .hero::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom,
-      rgba(0, 0, 0, 0.0) 0%,
-      rgba(0, 0, 0, 0.4) 80%);
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.0) 0%, rgba(0, 0, 0, 0.4) 80%);
   z-index: 0;
 }
 
@@ -62,206 +40,12 @@ section>div {
   opacity: 0.9;
 }
 
-/*-------------------------------PRODUCT & POPULAR 공통*/
-.productList {
-  display: flex;
-  gap: 12px;
-  overflow-x: auto;
-}
 
-.CardGridPc3Mobile3 {
-  display: grid;
-  gap: 12px;
-  grid-template-columns: repeat(3, 1fr);
-}
-
-.CardGridPc4Mobile2 {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-  overflow: visible;
-}
-
-/* 카드 공통 */
-.card {
-  flex: 0 0 calc((100% - 24px) / 3);
-  min-width: 140px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  overflow: hidden;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-
-}
-
-
-
-/*-------------------------------IMAGE*/
-.coverImage {
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  overflow: hidden;
-  border-radius: 5px;
-}
-
-.image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.3s ease;
-}
-
-.card:hover .image {
-  transform: scale(1.08);
-}
-
-/*-------------------------------INFO*/
-.meta {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.subTitle {
-  font-size: 11px;
-  color: var(--color-text-sub);
-}
-
-.title {
-  font-size: 13px;
-  line-height: 1.3;
-}
-
-.content {
-  font-size: 14px;
-  display: -webkit-box;
-  line-clamp: 2;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  margin-bottom: 7px;
-}
-
-.contentTitle {
-  font-size: 16px;
-  display: -webkit-box;
-  overflow: hidden;
-  line-clamp: 2;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-
-}
-
-.review {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 12px;
-}
-
-.rating {
-  color: var(--color-primary);
-  font-weight: 500;
-}
-
-.count {
-  color: var(--color-text-sub)
-}
-
-.highlight {
-  font-size: 16px;
-  font-weight: var(--font-bold);
-  color: var(--color-text-main);
-}
-
-/*-------------------------------PRODUCT TABS*/
-.products>div button {
-  padding: 4px 10px;
-  border-radius: 6px;
-  border: 1px solid #ddd;
-  background: #fff;
-  cursor: pointer;
-  font-size: 13px;
-  white-space: nowrap;
-  transition: all 0.1s ease;
-  color: var(--color-text-main);
-}
-
-.products>div button.active {
-  background-color: var(--color-primary);
-  color: var(--white);
-}
-
-/*-------------------------------INFO*/
-
-.categoryWrapper {
-  position: relative;
-}
-
-.categoryWrapper .arrow {
-  display: none;
-}
-
-.categoryRow {
-  display: flex;
-  gap: 8px;
-  overflow-x: auto;
-  flex-wrap: nowrap;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-.categoryRow::-webkit-scrollbar {
-  display: none;
-}
-
-.categoryRow button {
-  flex-shrink: 0;
-  white-space: nowrap;
-}
-
-.left {
-  left: 0;
-}
-
-.right {
-  right: 0;
-}
-
-
-/*-------------------------------RESPONSIVE TABLET*/
-@media (min-width: 400px) and (max-width: 1024px) {
-
-  .title {
-    font-size: 14px;
-  }
-
-  .highlight {
-    font-size: 16px;
-  }
-
-  .categoryWrapper .arrow {
-    display: block;
-  }
-}
-
-/*-------------------------------RESPONSIVE PC*/
 @media (min-width: 1024px) {
-  section {
-    margin-bottom: 60px;
-  }
-
-  section h2 {
-    margin-left: 0px;
-  }
-
   .hero {
     height: 360px;
     padding: 40px;
     border-radius: 10px;
-
-    /* 🔥 PC는 조금 위쪽 강조 */
     background-position: 50% 35%;
   }
 
@@ -272,68 +56,5 @@ section>div {
   .hero p {
     font-size: 16px;
     margin-top: 10px;
-  }
-
-  .CardGridPc4Mobile2 {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-    overflow: visible;
-  }
-
-  .CardGridPc3Mobile1 {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    overflow: visible;
-  }
-
-  .card {
-    min-width: auto;
-    gap: 10px;
-  }
-
-  .card:hover .image {
-    transform: scale(1.1);
-  }
-
-  /* 텍스트 */
-  .subTitle {
-    font-size: 12px;
-  }
-
-  .title {
-    font-size: 15px;
-  }
-
-  .review {
-    font-size: 12px;
-    gap: 6px;
-  }
-
-  .highlight {
-    font-size: 17px;
-  }
-
-  .categoryWrapper .arrow {
-    display: block;
-    background-color: var(--light-gray);
-    color: var(--white);
-  }
-
-  .products>div {
-    gap: 12px;
-    margin-bottom: 20px;
-    overflow: visible;
-  }
-
-  .products>div button {
-    font-size: 14px;
-    padding: 4px 12px;
-    border-radius: 9px;
-  }
-
-  .products>div button:hover {
-    filter: brightness(0.9);
   }
 }

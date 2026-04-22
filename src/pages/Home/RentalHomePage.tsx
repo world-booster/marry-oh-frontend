@@ -1,4 +1,4 @@
-import { useState, useRef, useLayoutEffect } from "react";
+import { useState } from "react";
 import "@/assets/styles/global.css";
 import { menuMap } from "@/constants/menu";
 import styles from "@/pages/Home/RentalHomapage.module.css";
@@ -6,6 +6,8 @@ import bannerData from "@/data/wedding/mockBanner.json";
 import bestProducts from "@/data/wedding/mockBestProducts.json";
 import studioReview from "@/data/rental/mockRentalHomeStudioReview.json";
 import hallReview from "@/data/rental/mockRentalHomeHallReview.json";
+import { useHorizontalScroll } from "@/hooks/useHorizontalScroll";
+
 
 export default function RentalHomePage() {
   const banner = bannerData.banners[1];
@@ -17,28 +19,13 @@ export default function RentalHomePage() {
   const filteredProducts = bestProducts[selectedBestCategory as keyof typeof bestProducts] || [];
 
   /* 베스트 카테고리 PC버전 가로 이동 화살표 */
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(true);
+  const {
+    scrollRef,
+    canScrollLeft,
+    canScrollRight,
+    scroll,
+  } = useHorizontalScroll([categories]);
 
-  const checkScroll = () => {
-    if (!scrollRef.current) return;
-    const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
-    setCanScrollLeft(scrollLeft > 0);
-    setCanScrollRight(scrollLeft + clientWidth < scrollWidth - 1);
-  };
-
-  useLayoutEffect(() => {
-    checkScroll();
-  }, [categories]);
-
-  const scrollCategory = (dir: "left" | "right") => {
-    if (!scrollRef.current) return;
-    scrollRef.current.scrollBy({
-      left: dir === "left" ? -500 : 500,
-      behavior: "smooth",
-    });
-  };
 
 
 
@@ -46,7 +33,7 @@ export default function RentalHomePage() {
     <div className="contentsContainer">
       {/* HERO */}
       <section className={styles.hero} style={{ backgroundImage: `url(${banner.imageUrl})` }}>
-      {/* <section className={styles.hero}> */}
+        {/* <section className={styles.hero}> */}
         <h1>{banner.title}</h1>
         <p>{banner.description}</p>
       </section>
@@ -55,19 +42,17 @@ export default function RentalHomePage() {
       {/* STUDIO REVIEW */}
       <section>
         <h2>스튜디오 촬영후기</h2>
-        <div className={styles.CardGridPc3Mobile3}>
+        <div className="gridPc3Mobile3">
           {studioReview.map((item) => (
-            <div key={item.id} className={styles.card}>
-              {/* 이미지 */}
-              <div className={styles.coverImage}>
-                <img src={item.img} alt={item.title} className={styles.image} />
+            <div key={item.id} className="card">
+              <div className="coverImage">
+                <img src={item.img} alt={item.title} />
               </div>
-              {/* 정보 */}
-              <div className={styles.meta}>
-                <span className={styles.subTitle}> {item.nickname} </span>
-                <div className={styles.title}>{item.title}</div>
-                <div className={styles.review}>
-                  <span className={styles.count}>조회수 {item.viewCount.toLocaleString()}</span>
+              <div className="meta">
+                <span className="nickname"> {item.nickname} </span>
+                <div className="productTitle">{item.title}</div>
+                <div className="reviewCount">
+                  <span>조회수 {item.viewCount.toLocaleString()}</span>
                 </div>
               </div>
             </div>
@@ -76,22 +61,19 @@ export default function RentalHomePage() {
       </section>
 
 
-      {/* WEDDINGHALL REVIEW */}
       <section>
         <h2>예식장 후기</h2>
-        <div className={styles.CardGridPc4Mobile2}>
+        <div className="gridPc4Mobile2">
           {hallReview.map((item) => (
-            <div key={item.id} className={styles.card}>
-              {/* 이미지 */}
-              <div className={styles.coverImage}>
-                <img src={item.img} alt={item.title} className={styles.image} />
+            <div key={item.id} className="card">
+              <div className="coverImage">
+                <img src={item.img} alt={item.title} />
               </div>
-              {/* 정보 */}
-              <div className={styles.meta}>
-                <span className={styles.subTitle}> {item.nickname} </span>
-                <div className={styles.title}>{item.title}</div>
-                <div className={styles.review}>
-                  <span className={styles.count}>조회수 {item.viewCount.toLocaleString()}</span>
+              <div className="meta">
+                <span className="nickname"> {item.nickname} </span>
+                <div className="productTitle">{item.title}</div>
+                <div className="reviewCount">
+                  <span>조회수 {item.viewCount.toLocaleString()}</span>
                 </div>
               </div>
             </div>
@@ -100,59 +82,46 @@ export default function RentalHomePage() {
       </section>
 
 
-
-
-      {/* BEST PRODUCTS */}
-      <section className={styles.products}>
+      <section>
         <h2>베스트</h2>
-        <div className={styles.categoryWrapper}>
-          {/* 왼쪽 버튼 */}
+        <div className="categoryWrapper">
           {canScrollLeft && (
-            <button className={styles.arrow} onClick={() => scrollCategory("left")}>
+            <button className="arrow" onClick={() => scroll("left")}>
               <i className="fas fa-chevron-left"></i>
             </button>
           )}
-
-          {/* 기존 코드 그대로 + ref만 추가 */}
-          <div ref={scrollRef} className={styles.categoryRow} onScroll={checkScroll}>
+          <div ref={scrollRef} className="categoryTabs">
             {categories.map((menu) => (
               <button
                 key={menu.menuKey}
-                className={selectedBestCategory === menu.menuKey ? styles.active : ""}
+                className={selectedBestCategory === menu.menuKey ? "active" : ""}
                 onClick={() => setSelectedBestCategory(menu.menuKey)}
               >
                 {menu.label}
               </button>
             ))}
           </div>
-
-          {/* 오른쪽 버튼 */}
           {canScrollRight && (
-            <button className={styles.arrow} onClick={() => scrollCategory("right")}>
+            <button className="arrow" onClick={() => scroll("right")}>
               <i className="fas fa-chevron-right"></i>
             </button>
           )}
         </div>
 
 
-        {/* 상품 리스트 */}
-        <div className={styles.CardGrid3Columns}>
+        <div className="gridPc3Mobile3">
           {filteredProducts.map((product) => (
-            <div key={product.id} className={styles.card}>
-              <div className={styles.coverImage}>
-                <img src={product.img} alt={product.title} className={styles.image} />
+            <div key={product.id} className="card">
+              <div className="coverImage">
+                <img src={product.img} alt={product.title} />
               </div>
-              <div className={styles.meta}>
-                <span className={styles.subTitle}>{product.vendor}</span>
-                <div className={styles.title}>{product.title}</div>
-                <div className={styles.highlight}>{product.price.toLocaleString()}</div>
-                <div className={styles.review}>
-                  <span className={styles.rating}>
-                    평점 {product.rating}
-                  </span>
-                  <span className={styles.count}>
-                    리뷰 {product.reviewCount.toLocaleString()}
-                  </span>
+              <div className="meta">
+                <span className="vendor">{product.vendor}</span>
+                <div className="productTitle">{product.title}</div>
+                <div className="highlight">{product.price.toLocaleString()}</div>
+                <div className="reviewCount">
+                  <span>평점 {product.rating}</span>
+                  <span>리뷰 {product.reviewCount.toLocaleString()}</span>
                 </div>
               </div>
             </div>
