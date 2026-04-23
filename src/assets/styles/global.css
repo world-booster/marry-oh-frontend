@@ -215,6 +215,11 @@ section>div {
  overflow: visible;
 }
 
+.center{
+    text-align: center;
+}
+
+
 @media (min-width: 400px) and (max-width: 1024px) {
     .highlight {
         font-size: 16px;

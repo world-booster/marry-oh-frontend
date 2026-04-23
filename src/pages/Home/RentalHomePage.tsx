@@ -3,9 +3,9 @@ import "@/assets/styles/global.css";
 import { menuMap } from "@/constants/menu";
 import styles from "@/pages/Home/RentalHomapage.module.css";
 import bannerData from "@/data/wedding/mockBanner.json";
-import bestProducts from "@/data/wedding/mockBestProducts.json";
-import studioReview from "@/data/rental/mockRentalHomeStudioReview.json";
-import hallReview from "@/data/rental/mockRentalHomeHallReview.json";
+import bestProducts from "@/data/rental/mockRentalBestProduct.json";
+import studioReview from "@/data/rental/mockRentalStudioReview.json";
+import hallReview from "@/data/rental/mockRentalHallReview.json";
 import { useHorizontalScroll } from "@/hooks/useHorizontalScroll";
 
 

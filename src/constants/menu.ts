@@ -76,10 +76,11 @@ export const menuMap = {
         type: "product",
         subMenus: [
             {
+
                 label: "홈",
                 menuKey: "home",
                 path: "/rental/home",
-                img: "/icons/sub-menu/home.png"
+                img: "/icons/sub-menu/rental-home.png"
             },
             {
                 label: "스튜디오",
@@ -127,7 +128,7 @@ export const menuMap = {
                 path: "/rental/weddingcar",
                 img: "/icons/sub-menu/weddingcar.png",
                 children: [
-                    { id: "204010000000", label: "의전용", path: "/catering/korean" },
+                    { id: "204010000000", label: "의전용", path: "/rental/weddingcar/test" },
                 ]
             },
         ],

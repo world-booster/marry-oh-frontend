@@ -1,0 +1,118 @@
+{
+  "studio": [
+    {
+      "id": 1,
+      "vendor": "모먼트 스튜디오",
+      "title": "프리미엄 웨딩 촬영 패키지",
+      "price": 1800000,
+      "img": "/images/rental-home/best-product/studio1.jpg",
+      "rating": 4.9,
+      "reviewCount": 210
+    },
+    {
+      "id": 2,
+      "vendor": "라이트웨이브",
+      "title": "야외 스냅 웨딩 촬영",
+      "price": 1200000,
+      "img": "/images/rental-home/best-product/studio2.jpg",
+      "rating": 4.8,
+      "reviewCount": 156
+    },
+    {
+      "id": 3,
+      "vendor": "화이트룸 스튜디오",
+      "title": "미니멀 웨딩 촬영",
+      "price": 900000,
+      "img": "/images/rental-home/best-product/studio3.jpg",
+      "rating": 4.7,
+      "reviewCount": 98
+    }
+  ],
+  "weddinghall": [
+    {
+      "id": 1,
+      "vendor": "그랜드 컨벤션",
+      "title": "럭셔리 호텔 웨딩홀",
+      "price": 5000000,
+      "img": "/images/rental-home/best-product/hall1.jpg",
+      "rating": 4.9,
+      "reviewCount": 320
+    },
+    {
+      "id": 2,
+      "vendor": "가든 블리스",
+      "title": "야외 가든 웨딩홀",
+      "price": 3500000,
+      "img": "/images/rental-home/best-product/hall2.jpg",
+      "rating": 4.8,
+      "reviewCount": 205
+    },
+    {
+      "id": 3,
+      "vendor": "라온 웨딩홀",
+      "title": "소규모 하우스 웨딩",
+      "price": 2500000,
+      "img": "/images/rental-home/best-product/hall3.jpg",
+      "rating": 4.6,
+      "reviewCount": 140
+    }
+  ],
+  "catering": [
+    {
+      "id": 1,
+      "vendor": "테이블앤코",
+      "title": "프리미엄 웨딩 케이터링",
+      "price": 80000,
+      "img": "/images/rental-home/best-product/catering1.jpg",
+      "rating": 4.9,
+      "reviewCount": 180
+    },
+    {
+      "id": 2,
+      "vendor": "푸드아트",
+      "title": "뷔페 스타일 케이터링",
+      "price": 60000,
+      "img": "/images/rental-home/best-product/catering2.jpg",
+      "rating": 4.7,
+      "reviewCount": 132
+    },
+    {
+      "id": 3,
+      "vendor": "미식가",
+      "title": "코스요리 웨딩 케이터링",
+      "price": 100000,
+      "img": "/images/rental-home/best-product/catering3.jpg",
+      "rating": 4.8,
+      "reviewCount": 97
+    }
+  ],
+  "weddingcar": [
+    {
+      "id": 1,
+      "vendor": "럭셔리 드라이브",
+      "title": "롤스로이스 웨딩카",
+      "price": 500000,
+      "img": "/images/rental-home/best-product/car1.jpg",
+      "rating": 4.9,
+      "reviewCount": 75
+    },
+    {
+      "id": 2,
+      "vendor": "클래식카 렌탈",
+      "title": "빈티지 클래식 웨딩카",
+      "price": 300000,
+      "img": "/images/rental-home/best-product/car2.jpg",
+      "rating": 4.7,
+      "reviewCount": 58
+    },
+    {
+      "id": 3,
+      "vendor": "프리미엄 모빌리티",
+      "title": "벤츠 S클래스 웨딩카",
+      "price": 400000,
+      "img": "/images/rental-home/best-product/car3.jpg",
+      "rating": 4.8,
+      "reviewCount": 64
+    }
+  ]
+}

@@ -6,12 +6,16 @@ import MenuList from "@/components/Layout/Header/Navigation/MenuList";
 
 interface SubMenuProps {
   selectedMainMenu: MainMenuKey;
-  selectedSubMenu: SubMenuKey;
+  selectedSubMenu?: SubMenuKey;
+  hoverMenu?: SubMenuKey;
+  onHover?: (menuKey: SubMenuKey) => void;
 }
 
 export default function SubMenu({
   selectedMainMenu,
-  selectedSubMenu
+  selectedSubMenu,
+  hoverMenu,
+  onHover
 }: SubMenuProps) {
 
   const navigate = useNavigate();
@@ -22,7 +26,6 @@ export default function SubMenu({
     );
 
     if (!item) return;
-
     navigate(item.path);
   };
 
@@ -31,11 +34,13 @@ export default function SubMenu({
       className={styles.subMenuWrapper}
       onClick={(e) => e.stopPropagation()}
     >
-      <MenuList
-        className={styles["subMenuNav"]}
+      <MenuList<SubMenuKey>
+        className={styles.subMenuNav}
         items={subMenuItems}
         selectedMenu={selectedSubMenu}
         onItemClick={handleClick}
+        hoverMenu={hoverMenu}
+        onItemHover ={onHover}
       />
     </nav>
   );

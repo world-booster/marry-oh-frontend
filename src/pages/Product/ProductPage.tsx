@@ -1,17 +1,61 @@
 import { useNavigate, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { menuMap } from "@/constants/menu";
+import "@/assets/styles/global.css";
 import styles from "./ProductPage.module.css";
+
+/* 🔥 mock 데이터 (서버 대신) */
+const mockProducts: Record<
+  string,
+  { id: number; title: string; price: number; img: string }[]
+> = {
+  "101010000000": [
+    {
+      id: 1,
+      title: "프리미엄 웨딩 드레스",
+      price: 1200000,
+      img: "/images/home/best-product/dress1.jpg",
+    },
+    {
+      id: 2,
+      title: "레이스 머메이드 드레스",
+      price: 950000,
+      img: "/images/home/best-product/dress2.jpg",
+    },
+  ],
+
+  "101040000000": [
+    {
+      id: 10,
+      title: "생화 부케",
+      price: 150000,
+      img: "/images/home/best-product/flower1.jpg",
+    },
+    {
+      id: 11,
+      title: "프리미엄 플라워 세트",
+      price: 300000,
+      img: "/images/home/best-product/flower2.jpg",
+    },
+  ],
+};
+
+interface Product {
+  id: number;
+  title: string;
+  price: number;
+  img: string;
+}
 
 export default function ProductPage() {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const [products, setProducts] = useState<Product[]>([]);
   const mainMenuKey = location.pathname.split("/")[1] as keyof typeof menuMap;
   const menu = menuMap[mainMenuKey];
 
-  /**
-   * 🔥 핵심: children 있는 subMenu만 찾기 + 가장 구체적인 경로 선택
-   */
+  /* 🔥 현재 서브메뉴 찾기 */
   const currentSubMenu = [...menu.subMenus]
     .filter(
       (sub): sub is typeof sub & {
@@ -21,34 +65,51 @@ export default function ProductPage() {
     .sort((a, b) => b.path.length - a.path.length)
     .find((sub) => location.pathname.startsWith(sub.path));
 
-  /**
-   * 🔥 현재 child 찾기 (타입 안전)
-   */
-  const currentChild = currentSubMenu?.children.find((child) =>
-    location.pathname.startsWith(child.path)
+  const currentChild = currentSubMenu?.children.find(
+    (child) => location.pathname === child.path
   );
 
+  const categoryId = currentChild?.id;
+
+  useEffect(() => {
+    if (!currentSubMenu) return;
+    if (!currentChild && currentSubMenu.children.length > 0) {
+      navigate(currentSubMenu.children[0].path, { replace: true });
+    }
+  }, [currentSubMenu, currentChild, navigate]);
+
+
+  useEffect(() => {
+    if (!categoryId) return;
+
+    const data = mockProducts[categoryId] || [];
+    setProducts(data);
+  }, [categoryId]);
+
+
+
+
   return (
-    <div className={styles.container}>
-      {/* 🔥 모바일: 상단 subMenu */}
+    <div className="contentsContainer">
+      {/* 🔥 모바일 메뉴 */}
       <div className={styles.mobileMenu}>
-        {menu.subMenus.map((sub) => (
+        {currentSubMenu?.children.map((child) => (
           <button
-            key={sub.menuKey}
+            key={child.id}
             className={
-              currentSubMenu?.menuKey === sub.menuKey
+              currentChild?.id === child.id
                 ? styles.active
                 : ""
             }
-            onClick={() => navigate(sub.path)}
+            onClick={() => navigate(child.path)}
           >
-            {sub.label}
+            {child.label}
           </button>
         ))}
       </div>
 
       <div className={styles.layout}>
-        {/* 🔥 PC 사이드바 (children ONLY) */}
+        {/* 🔥 사이드바 */}
         <aside className={styles.sidebar}>
           {currentSubMenu?.children.map((child) => (
             <div
@@ -67,6 +128,7 @@ export default function ProductPage() {
 
         {/* 🔥 메인 */}
         <main className={styles.main}>
+          {/* 🔥 상단바 */}
           <div className={styles.topBar}>
             <input placeholder="상품 검색" />
 
@@ -78,16 +140,21 @@ export default function ProductPage() {
             </select>
           </div>
 
+          {/* 🔥 상품 리스트 */}
           <div className={styles.productGrid}>
-            {Array.from({ length: 12 }).map((_, i) => (
-              <div key={i} className={styles.card}>
-                <img src="/images/sample.jpg" alt="상품" />
-                <div className={styles.info}>
-                  <h4>상품 {i + 1}</h4>
-                  <p>₩100,000</p>
+            {products.length === 0 ? (
+              <p>상품이 없습니다.</p>
+            ) : (
+              products.map((product) => (
+                <div key={product.id} className={styles.card}>
+                  <img src={product.img} alt={product.title} />
+                  <div className={styles.info}>
+                    <h4>{product.title}</h4>
+                    <p>₩{product.price.toLocaleString()}</p>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))
+            )}
           </div>
         </main>
       </div>
