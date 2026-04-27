@@ -161,16 +161,16 @@ export const menuMap = {
 
                 ]
             },
-            {
-                label: "정보공유",
-                menuKey: "info",
-                path: "/community/info",
-                img: "/icons/sub-menu/info.png",
-                children: [
-                    { id: "4010000000", label: "결혼식꿀팁", path: "/community/info/tips" },
+            // {
+            //     label: "정보공유",
+            //     menuKey: "info",
+            //     path: "/community/info",
+            //     img: "/icons/sub-menu/info.png",
+            //     children: [
+            //         { id: "4010000000", label: "결혼식꿀팁", path: "/community/info/tips" },
 
-                ]
-            },
+            //     ]
+            // },
         ],
     },
 } as const;
@@ -193,7 +193,6 @@ export const mainMenuItems: { label: string; menuKey: MainMenuKey }[] =
     }));
 
 
-export type SubMenuKeyOf<T extends MainMenuKey> = typeof menuMap[T]["subMenus"][number]["menuKey"];
 
 
 /* 메인메뉴의 기본서브메뉴  */
@@ -201,3 +200,20 @@ export const defaulSubMenuByMain: Record<MainMenuKey, SubMenuKey> =
     Object.fromEntries(
         Object.entries(menuMap).map(([key, value]) => [key, value.subMenus[0].menuKey,])
     ) as Record<MainMenuKey, SubMenuKey>;
+
+
+/* 해당 카테고리 경로 */
+export const categoryPathMap: Record<string, string> =
+    Object.fromEntries(
+        Object.values(menuMap).flatMap(main =>
+            main.subMenus.flatMap(sub =>
+                "children" in sub
+                    ? sub.children.map(child => [child.id, child.path])
+                    : []
+            )
+        )
+    );
+
+export const getCategoryPath = (categoryId: string): string | undefined => {
+    return categoryPathMap[categoryId];
+}

@@ -1,0 +1,227 @@
+/* MOBILE */
+
+.mobileMenu {
+  display: flex;
+  overflow-x: auto;
+  gap: 10px;
+  margin-top: 5px;
+}
+
+.mobileMenu button {
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid #e5e5e5;
+  background: #fafafa;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mobileMenu button.active {
+  background: var(--color-primary);
+  color: white;
+  border-color: var(--color-primary);
+}
+
+.mobileMenu button:hover {
+  background: #f0f0f0;
+}
+
+.layout {
+  display: block;
+}
+
+.sidebar {
+  display: none;
+}
+
+.main {
+  width: 100%;
+}
+
+.topBar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.searchWrapper {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  background: white;
+}
+
+.searchWrapper input {
+  flex: 1;
+  min-width: 0;
+  height: 40px;
+  padding: 0 12px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+}
+
+.searchBtn {
+  width: 44px;
+  height: 40px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-sub);
+  border: none;
+  cursor: pointer;
+}
+
+.searchBtn i {
+  font-size: 16px;
+}
+
+.searchBtn:hover {
+  filter: brightness(0.9);
+}
+
+.selectBox {
+  position: relative;
+  width: 120px;
+  flex-shrink: 0;
+}
+
+.selectBox select {
+  width: 100%;
+  height: 40px;
+  padding: 0 32px 0 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: white;
+  font-size: 13px;
+  cursor: pointer;
+  appearance: none;
+}
+
+.selectBox::after {
+  content: "";
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  border-right: 2px solid #666;
+  border-bottom: 2px solid #666;
+  transform: translateY(-50%) rotate(45deg);
+  pointer-events: none;
+}
+
+
+.productGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.card {
+  border-radius: 14px;
+  overflow: hidden;
+  background: white;
+  border: 1px solid #f0f0f0;
+  transition: all 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.info {
+  padding: 12px;
+}
+
+.info h4 {
+  font-size: 14px;
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.info p {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* PC */
+
+@media (min-width: 1024px) {
+  .mobileMenu {
+    display: none;
+  }
+
+  .layout {
+    display: flex;
+    gap: 30px;
+  }
+
+  .sidebar {
+    display: block;
+    width: 220px;
+    padding: 20px;
+    border-radius: 14px;
+    background: white;
+    border: 1px solid #eee;
+    height: fit-content;
+  }
+
+  .childItem {
+    padding: 10px 0;
+    cursor: pointer;
+    color: #666;
+    font-size: 15px;
+    transition: all 0.2s ease;
+  }
+
+  .childItem:hover {
+    color: var(--color-primary);
+    transform: translateX(4px);
+  }
+
+  .activeChild {
+    padding: 10px 0;
+    font-weight: 600;
+    color: var(--color-primary);
+  }
+
+  .main {
+    flex: 1;
+  }
+
+  .topBar {
+    justify-content: space-between;
+  }
+
+  .searchWrapper {
+    max-width: 400px;
+  }
+
+  .selectBox {
+    width: 160px;
+  }
+
+  .productGrid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+
+  .card img {
+    height: 180px;
+  }
+}

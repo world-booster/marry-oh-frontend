@@ -1,5 +1,5 @@
 import { useLocation } from "react-router-dom";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import styles from "@/components/Layout/Header/Header.module.css";
 import Logo from "@/components/Logo/Logo";
 import MainMenu from "@/components/Layout/Header/Navigation/MainMenu";
@@ -17,17 +17,28 @@ export default function Header() {
   const urlMain = (main ?? "wedding") as MainMenuKey;
   const urlSub = (sub ?? "home") as SubMenuKey;
 
-  /* Hover 상태 관리 */
-  const [hoverMainMenu, setHoverMainMenu] = useState<MainMenuKey | undefined>(undefined);
-  const selectedMainMenu = hoverMainMenu ?? urlMain;
-  const [hoverSubMenu, setHoverSubMenu] = useState<SubMenuKey | undefined>(undefined);
+  const [hoverMainMenu, setHoverMainMenu] = useState<MainMenuKey | undefined>();
+  const [hoverSubMenu, setHoverSubMenu] = useState<SubMenuKey | undefined>();
+
+  /* 🔥 핵심: URL 바뀌면 hover 초기화 */
+  useEffect(() => {
+    setHoverMainMenu(undefined);
+    setHoverSubMenu(undefined);
+  }, [pathname]);
+
+  const selectedMainMenu = urlMain;
+
+  /* hover 중이면 active 제거 */
   const selectedSubMenu = hoverMainMenu ? undefined : urlSub;
 
+  const displayMainMenu = hoverMainMenu ?? selectedMainMenu;
+
   return (
-    <div className={styles.headerWrapper}
+    <div
+      className={styles.headerWrapper}
       onMouseLeave={() => {
         setHoverMainMenu(undefined);
-        setHoverSubMenu?.(undefined);
+        setHoverSubMenu(undefined);
       }}
     >
       <header>
@@ -38,21 +49,24 @@ export default function Header() {
 
           <MainMenu
             selectedMainMenu={selectedMainMenu}
-            hoverMenu={hoverMainMenu ?? undefined}
+            hoverMenu={hoverMainMenu}
             onHover={(menuKey) => {
               if (menuKey === urlMain) {
                 setHoverMainMenu(undefined);
                 return;
               }
+
               setHoverMainMenu(menuKey);
+              setHoverSubMenu(undefined);
             }}
           />
+
           <AccountMenu />
         </div>
       </header>
 
       <SubMenu
-        selectedMainMenu={selectedMainMenu}
+        selectedMainMenu={displayMainMenu}
         selectedSubMenu={selectedSubMenu}
         onHover={setHoverSubMenu}
         hoverMenu={hoverSubMenu}

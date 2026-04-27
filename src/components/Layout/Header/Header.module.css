@@ -87,7 +87,7 @@ header {
     transform: translateY(0);
 }
 
-/*-------------------------------SECONDARY NAVIGATION*/
+/*-------------------------------SUBMENU*/
 .subMenuWrapper {
     width: 100%;
     overflow-x: auto;
@@ -130,6 +130,11 @@ header {
     transform: translateY(-1px);
 }
 
+.subMenuNav button.active {
+    color: var(--color-primary);
+    font-weight: var(--font-bold);
+}
+
 .subMenuNav button img {
     width: 40px;
     height: 40px;
@@ -164,7 +169,7 @@ header {
         justify-content: space-between;
         max-width: 1200px;
         min-height: 65px;
-        padding: 0 100px;
+        padding: var(--common-padding);
         margin: 0 auto;
     }
 
@@ -204,10 +209,12 @@ header {
         margin-top: 0;
     }
 
-    /*-------------------------------SECONDARY NAVIGATION*/
+    /*-------------------------------SUBMENU*/
     .subMenuWrapper {
         text-align: center;
         padding: 5px 0px 0px 0px;
+        margin: 0 auto;
+        padding: var(--common-padding);
     }
 
     .subMenuNav button {

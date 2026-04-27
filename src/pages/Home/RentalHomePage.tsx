@@ -2,11 +2,11 @@ import { useState } from "react";
 import "@/assets/styles/global.css";
 import { menuMap } from "@/constants/menu";
 import styles from "@/pages/Home/RentalHomapage.module.css";
-import bannerData from "@/data/wedding/mockBanner.json";
-import bestProducts from "@/data/rental/mockRentalBestProduct.json";
-import studioReview from "@/data/rental/mockRentalStudioReview.json";
-import hallReview from "@/data/rental/mockRentalHallReview.json";
-import { useHorizontalScroll } from "@/hooks/useHorizontalScroll";
+import bannerData from "@/data/wedding/home/mockBanner.json";
+import bestProducts from "@/data/rental/home/mockRentalBestProduct.json";
+import studioReview from "@/data/rental/home/mockRentalStudioReview.json";
+import hallReview from "@/data/rental/home/mockRentalHallReview.json";
+import CategoryTabs from "@/components/common/CategoryTabs";
 
 
 export default function RentalHomePage() {
@@ -17,15 +17,6 @@ export default function RentalHomePage() {
   const defaultCategory = categories[0]?.menuKey ?? "";
   const [selectedBestCategory, setSelectedBestCategory] = useState<string>(defaultCategory);
   const filteredProducts = bestProducts[selectedBestCategory as keyof typeof bestProducts] || [];
-
-  /* 베스트 카테고리 PC버전 가로 이동 화살표 */
-  const {
-    scrollRef,
-    canScrollLeft,
-    canScrollRight,
-    scroll,
-  } = useHorizontalScroll([categories]);
-
 
 
 
@@ -84,29 +75,14 @@ export default function RentalHomePage() {
 
       <section>
         <h2>베스트</h2>
-        <div className="categoryWrapper">
-          {canScrollLeft && (
-            <button className="arrow" onClick={() => scroll("left")}>
-              <i className="fas fa-chevron-left"></i>
-            </button>
-          )}
-          <div ref={scrollRef} className="categoryTabs">
-            {categories.map((menu) => (
-              <button
-                key={menu.menuKey}
-                className={selectedBestCategory === menu.menuKey ? "active" : ""}
-                onClick={() => setSelectedBestCategory(menu.menuKey)}
-              >
-                {menu.label}
-              </button>
-            ))}
-          </div>
-          {canScrollRight && (
-            <button className="arrow" onClick={() => scroll("right")}>
-              <i className="fas fa-chevron-right"></i>
-            </button>
-          )}
-        </div>
+        <CategoryTabs
+          items={categories.map((menu) => ({
+            id: menu.menuKey,
+            label: menu.label,
+          }))}
+          selectedId={selectedBestCategory}
+          onClick={(item) => setSelectedBestCategory(item.id)}
+        />
 
 
         <div className="gridPc3Mobile3">
@@ -118,7 +94,7 @@ export default function RentalHomePage() {
               <div className="meta">
                 <span className="vendor">{product.vendor}</span>
                 <div className="productTitle">{product.title}</div>
-                <div className="highlight">{product.price.toLocaleString()}</div>
+                <div className="highlightBold">{product.price.toLocaleString()}</div>
                 <div className="reviewCount">
                   <span>평점 {product.rating}</span>
                   <span>리뷰 {product.reviewCount.toLocaleString()}</span>

@@ -1,3 +1,5 @@
+import styles from "@/components/Layout/Header/Header.module.css";
+
 interface MenuItem<T> {
   label: string;
   menuKey: T;
@@ -32,7 +34,7 @@ export default function MenuList<T>({
         return (
           <li key={item.label}>
             <button
-              className={isActive ? "active" : ""}
+              className={isActive ? styles.active : ""}
               onMouseEnter={() => onItemHover?.(item.menuKey)}
               onClick={() => onItemClick?.(item.menuKey)}
             >

@@ -1,14 +1,16 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "@/assets/styles/global.css";
-import { menuMap } from "@/constants/menu";
+import { menuMap, getCategoryPath } from "@/constants/menu";
 import styles from "@/pages/Home/Homapage.module.css";
-import bannerData from "@/data/wedding/mockBanner.json";
-import bestProducts from "@/data/wedding/mockBestProducts.json";
-import popularWeddings from "@/data/wedding/mockPopularWedding.json";
-import weddingTips from "@/data/wedding/mockWeddingTips.json";
-import { useHorizontalScroll } from "@/hooks/useHorizontalScroll";
+import bannerData from "@/data/wedding/home/mockBanner.json";
+import bestProducts from "@/data/wedding/home/mockBestProducts.json";
+import popularWeddings from "@/data/wedding/home/mockPopularWedding.json";
+import weddingTips from "@/data/wedding/home/mockWeddingTips.json";
+import CategoryTabs from "@/components/common/CategoryTabs";
 
 export default function HomePage() {
+  const navigate = useNavigate();
   const banner = bannerData.banners[0];
 
   /* 베스트 카테고리 */
@@ -16,16 +18,6 @@ export default function HomePage() {
   const [selectedBestCategory, setSelectedBestCategory] = useState<string>(defaultCategory);
   const categories = menuMap.wedding.subMenus.flatMap(sub => "children" in sub ? [...sub.children] : []);
   const filteredProducts = bestProducts[selectedBestCategory as keyof typeof bestProducts] || [];
-
-  /* 베스트 카테고리 PC버전 가로 이동 화살표 */
-  const {
-    scrollRef,
-    canScrollLeft,
-    canScrollRight,
-    scroll,
-  } = useHorizontalScroll([categories]);
-
-
 
   return (
     <div className="contentsContainer">
@@ -66,7 +58,7 @@ export default function HomePage() {
         <div className="gridPc3Mobile1 overflowVisible">
           {weddingTips.map((item) => (
             <div key={item.id} className="card textOnly ">
-              <div className="highlight contentTitle">{item.title}</div>
+              <div className="highlightBold contentTitle">{item.title}</div>
               <div className="meta">
                 <div className="content">{item.content}</div>
                 <span className="nickname">{item.nickname}</span>
@@ -85,41 +77,33 @@ export default function HomePage() {
       {/* BEST PRODUCTS */}
       <section>
         <h2>베스트</h2>
-        <div className="categoryWrapper">
-          {canScrollLeft && (
-            <button className={styles.arrow} onClick={() => scroll("left")}>
-              <i className="fas fa-chevron-left"></i>
-            </button>
-          )}
-          <div ref={scrollRef} className="categoryTabs">
-            {categories.map((menu) => (
-              <button
-                key={menu.id}
-                className={selectedBestCategory === menu.id ? "active" : ""}
-                onClick={() => setSelectedBestCategory(menu.id)}
-              >
-                {menu.label}
-              </button>
-            ))}
-          </div>
-          {canScrollRight && (
-            <button className={styles.arrow} onClick={() => scroll("right")}>
-              <i className="fas fa-chevron-right"></i>
-            </button>
-          )}
-        </div>
+        <CategoryTabs
+          items={categories.map((menu) => ({
+            id: menu.id,
+            label: menu.label,
+          }))}
+          selectedId={selectedBestCategory}
+          onClick={(item) => setSelectedBestCategory(item.id)}
+        />
 
 
         <div className="gridPc3Mobile3">
           {filteredProducts.map((product) => (
-            <div key={product.id} className="card">
+            <div key={product.id}
+              className="card"
+              onClick={() => {
+                const path = getCategoryPath(selectedBestCategory);
+                if (!path) return;
+                navigate(`${path}?id=${product.id}`);
+              }}
+            >
               <div className="coverImage">
                 <img src={product.img} alt={product.title} />
               </div>
               <div className="meta">
                 <span className="vendor">{product.vendor}</span>
                 <div className="productTitle">{product.title}</div>
-                <div className="highlight">{product.price.toLocaleString()}</div>
+                <div className="highlightBold">{product.price.toLocaleString()}</div>
                 <div className="reviewCount">
                   <span className="rating">평점 {product.rating}</span>
                   <span>리뷰 {product.reviewCount.toLocaleString()}
