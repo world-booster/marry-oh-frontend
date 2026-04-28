@@ -41,7 +41,7 @@ export default function ProductListPage({ main, sub, child }: UrlSegments) {
   };
 
   return (
-    <div className="contentsContainer">
+    <div className="globalContainer">
       <div className={styles.mobileMenu}>
         <CategoryTabs
           items={currentSubMenu.children.map((child) => ({

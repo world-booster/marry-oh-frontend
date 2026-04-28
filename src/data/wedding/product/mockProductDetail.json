@@ -1,24 +1,83 @@
 {
-    "101010000001": {
-        "id": "1",
-        "title": "프리미엄 웨딩 드레스",
-        "vendor": "라벨르 드레스",
-        "thumbnails": [
-            "/images/home/best-product/dress1.jpg",
-            "/images/home/best-product/dress2.jpg",
-            "/images/home/best-product/dress3.jpg"
-        ],
-        "detailImages": [
-            "/images/product/101010000001/1.jpg",
-            "/images/product/101010000001/2.jpg"
-
-
-        ],
-        "description": "",
-        "rating": 4.8,
-        "reviewCount": 128,
-        "originalPrice": 1200000,
-        "finalPrice": 1080000,
-        "discountRate": 0.12
-    }
+  "101010000001": {
+    "id": "1",
+    "title": "프리미엄 웨딩 드레스",
+    "vendor": "라벨르 드레스",
+    "thumbnails": [
+      "/images/home/best-product/dress1.jpg",
+      "/images/home/best-product/dress2.jpg",
+      "/images/home/best-product/dress3.jpg"
+    ],
+    "detailImages": [
+      "/images/product/101010000001/1.jpg",
+      "/images/product/101010000001/2.jpg"
+    ],
+    "description": "",
+    "rating": 4.8,
+    "reviewCount": 128,
+    "originalPrice": 1200000,
+    "finalPrice": 1080000,
+    "discountRate": 0.12,
+    "qna": [
+      {
+        "id": "q1",
+        "question": "배송은 얼마나 걸리나요?",
+        "answer": "평균 배송은 2~3일 소요되며, 지역에 따라 최대 5일까지 소요될 수 있습니다. 주말 및 공휴일은 제외됩니다.",
+        "user": "user123",
+        "date": "2026-04-27"
+      },
+      {
+        "id": "q2",
+        "question": "사이즈 교환 가능한가요?",
+        "answer": "상품 수령 후 7일 이내 미사용 상태에 한해 교환 가능합니다. 단, 맞춤 제작 상품은 교환이 불가합니다.",
+        "user": "wedding88",
+        "date": "2026-04-25"
+      },
+      {
+        "id": "q3",
+        "question": "재입고 예정 있나요?",
+        "answer": "현재로서는 재입고 일정이 없으며, 추후 생산 계획이 확정되면 공지드릴 예정입니다.",
+        "user": "bride2026",
+        "date": "2026-04-20"
+      }
+    ],
+    "reviews": [
+      {
+        "id": "r1",
+        "user": "신부_지현",
+        "profileImage": "/images/profile/p-1.jpg",
+        "rating": 5,
+        "content": "드레스 퀄리티가 정말 좋아요. 촬영 때 너무 만족했습니다!",
+        "createdAt": "2026-04-27",
+        "image": "/images/product/101010000001/review/r-1.jpg"
+      },
+      {
+        "id": "r2",
+        "user": "웨딩준비중",
+        "profileImage": null,
+        "rating": 4,
+        "content": "핏이 예쁘고 사진도 잘 나와요. 다만 배송이 조금 늦었어요.",
+        "createdAt": "2026-04-25",
+        "image": "/images/product/101010000001/review/r-2.jpg"
+      },
+      {
+        "id": "r3",
+        "user": "행복한신부",
+        "profileImage": "/images/review/101010000001/r1-2.jpg",
+        "rating": 5,
+        "content": "가격 대비 너무 만족합니다. 추천드려요!",
+        "createdAt": "2026-04-23",
+        "image": null
+      },
+      {
+        "id": "r4",
+        "user": "예신2026",
+        "profileImage": "/images/review/101010000001/r1-2.jpg",
+        "rating": 4,
+        "content": "디자인이 고급스럽고 잘 맞았어요.",
+        "createdAt": "2026-04-20",
+        "image": "/images/product/101010000001/review/r-3.jpg"
+      }
+    ]
+  }
 }

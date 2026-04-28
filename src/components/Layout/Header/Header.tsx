@@ -20,7 +20,6 @@ export default function Header() {
   const [hoverMainMenu, setHoverMainMenu] = useState<MainMenuKey | undefined>();
   const [hoverSubMenu, setHoverSubMenu] = useState<SubMenuKey | undefined>();
 
-  /* 🔥 핵심: URL 바뀌면 hover 초기화 */
   useEffect(() => {
     setHoverMainMenu(undefined);
     setHoverSubMenu(undefined);
@@ -28,9 +27,7 @@ export default function Header() {
 
   const selectedMainMenu = urlMain;
 
-  /* hover 중이면 active 제거 */
   const selectedSubMenu = hoverMainMenu ? undefined : urlSub;
-
   const displayMainMenu = hoverMainMenu ?? selectedMainMenu;
 
   return (

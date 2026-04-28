@@ -21,7 +21,7 @@ export default function RentalHomePage() {
 
 
   return (
-    <div className="contentsContainer">
+    <div className="globalContainer">
       {/* HERO */}
       <section className={styles.hero} style={{ backgroundImage: `url(${banner.imageUrl})` }}>
         {/* <section className={styles.hero}> */}

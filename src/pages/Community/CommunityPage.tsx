@@ -1,6 +1,6 @@
 export default function CommunityPage() {
     return (
-        <div className="contentsContainer">
+        <div className="globalContainer">
             Hello, Community!
 
         </div>

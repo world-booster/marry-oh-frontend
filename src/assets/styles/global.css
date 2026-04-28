@@ -253,6 +253,7 @@ section>div {
     cursor: pointer;
 }
 
+
 @media (min-width: 767px) and (max-width: 1023px) {
     .highlightBold {
         font-size: 16px;
@@ -348,12 +349,12 @@ section>div {
 
 
 /*-------------------------------CONTENTS CONTAINER*/
-.contentsContainer {
+.globalContainer {
     padding: 10px;
 }
 
 @media (min-width: 1024px) {
-    .contentsContainer {
+    .globalContainer {
         max-width: 1200px;
         margin: 0 auto;
         padding: 30px 0px;

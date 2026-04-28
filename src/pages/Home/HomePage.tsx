@@ -20,7 +20,7 @@ export default function HomePage() {
   const filteredProducts = bestProducts[selectedBestCategory as keyof typeof bestProducts] || [];
 
   return (
-    <div className="contentsContainer">
+    <div className="globalContainer">
       {/* HERO */}
       {/*<section className={styles.hero} style={{ backgroundImage: `url(${banner.imageUrl})` }}> */}
       <section className={styles.hero}>
