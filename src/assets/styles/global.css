@@ -23,7 +23,7 @@
     --lemon: #FFFF00;
     --white: #ffffff;
     --ivory: #fafafa;
-    --white-gray: #e8edf3;
+    --white-gray: #eee;
     --light-gray: #c9c9c9;
     --mid-gray: #686868;
     --dark-gray: #363636;
@@ -70,7 +70,7 @@
     --focus-ring: 0 0 0 2px rgba(var(--color-primary-rgb), 0.3);
 
     /* padding */
-    --common-padding: 0px 50px;
+    --common-padding: 0px 20px;
 
 
     /* z-index */
@@ -253,6 +253,17 @@ section>div {
     cursor: pointer;
 }
 
+.divider {
+    height: 1px;
+    background: linear-gradient(to right,
+            transparent,
+            var(--white-gray),
+            transparent);
+    margin-bottom: 20px;
+}
+
+
+
 
 @media (min-width: 767px) and (max-width: 1023px) {
     .highlightBold {
@@ -265,6 +276,7 @@ section>div {
     .highlightBold {
         font-size: 17px;
     }
+
 }
 
 
@@ -357,7 +369,7 @@ section>div {
     .globalContainer {
         max-width: 1200px;
         margin: 0 auto;
-        padding: 30px 0px;
+        padding: 20px 0px;
     }
 }
 

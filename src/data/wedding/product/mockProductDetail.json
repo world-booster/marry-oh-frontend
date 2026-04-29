@@ -14,13 +14,49 @@
     ],
     "description": "",
     "rating": 4.8,
-    "reviewCount": 128,
     "originalPrice": 1200000,
     "finalPrice": 1080000,
     "discountRate": 0.12,
+    "baseShippingPolicy": [
+      {
+        "id": "1511",
+        "type": "CONDITIONAL",
+        "baseFee": 3500,
+        "freeThreshold": 150000
+      }
+    ],
+    "RegionShippingPolicy": [
+      {
+        "id": "1",
+        "policyId": "",
+        "regionType": "REMOTE",
+        "extraFee": 5000
+      },
+      {
+        "id": "2",
+        "policyId": "",
+        "regionType": "ISLAND",
+        "extraFee": 5000
+      }
+    ],
+    "isOptionRequired": false,
+    "options": [
+      {
+        "id": "1",
+        "label": "부케 추가",
+        "price": 70000
+      },
+      {
+        "id": "2",
+        "label": "베일 추가",
+        "price": 110000
+      }
+    ],
+    "qnaCount": 11,
     "qna": [
       {
         "id": "q1",
+        "isAnswered": true,
         "question": "배송은 얼마나 걸리나요?",
         "answer": "평균 배송은 2~3일 소요되며, 지역에 따라 최대 5일까지 소요될 수 있습니다. 주말 및 공휴일은 제외됩니다.",
         "user": "user123",
@@ -28,6 +64,7 @@
       },
       {
         "id": "q2",
+        "isAnswered": true,
         "question": "사이즈 교환 가능한가요?",
         "answer": "상품 수령 후 7일 이내 미사용 상태에 한해 교환 가능합니다. 단, 맞춤 제작 상품은 교환이 불가합니다.",
         "user": "wedding88",
@@ -35,19 +72,21 @@
       },
       {
         "id": "q3",
+        "isAnswered": true,
         "question": "재입고 예정 있나요?",
         "answer": "현재로서는 재입고 일정이 없으며, 추후 생산 계획이 확정되면 공지드릴 예정입니다.",
         "user": "bride2026",
         "date": "2026-04-20"
       }
     ],
+    "reviewCount": 128,
     "reviews": [
       {
         "id": "r1",
         "user": "신부_지현",
         "profileImage": "/images/profile/p-1.jpg",
         "rating": 5,
-        "content": "드레스 퀄리티가 정말 좋아요. 촬영 때 너무 만족했습니다!",
+        "content": "처음 입어보는 드레스라 긴장 많이 했는데, 입는 순간 그냥 “아 이거다” 싶었어요.라인이 진짜 예쁘게 떨어져서 체형 보완도 잘 되고, 사진보다 실물이 훨씬 고급스러워요.친구들도 다 어디서 했냐고 물어보고… 진짜 만족입니다.본식 때 다시 입는다고 생각하니까 벌써 설레요 :)",
         "createdAt": "2026-04-27",
         "image": "/images/product/101010000001/review/r-1.jpg"
       },
@@ -56,27 +95,54 @@
         "user": "웨딩준비중",
         "profileImage": null,
         "rating": 4,
-        "content": "핏이 예쁘고 사진도 잘 나와요. 다만 배송이 조금 늦었어요.",
+        "content": "솔직히 기대 반 걱정 반이었는데 생각보다 훨씬 괜찮았어요.상체가 있는 편이라 걱정했는데 라인이 잘 잡혀서 부담스럽지 않았고,허리도 얇아 보이게 만들어줘서 좋았어요.다만 움직일 때 살짝 불편한 느낌은 있었는데, 예쁜 걸 생각하면 감수 가능!",
         "createdAt": "2026-04-25",
         "image": "/images/product/101010000001/review/r-2.jpg"
       },
       {
         "id": "r3",
         "user": "행복한신부",
-        "profileImage": "/images/review/101010000001/r1-2.jpg",
+        "profileImage": null,
         "rating": 5,
-        "content": "가격 대비 너무 만족합니다. 추천드려요!",
+        "content": "비즈 디테일이 진짜 장난 아니에요… 가까이서 보면 훨 반짝이고 고급스러워요.조명 받으니까 은은하게 빛나서 사진이 너무 잘 나오더라구요.원단도 싸보이는 느낌 전혀 없고, 전체적으로 마감도 깔끔해서 만족했어요.",
         "createdAt": "2026-04-23",
         "image": null
       },
       {
         "id": "r4",
         "user": "예신2026",
-        "profileImage": "/images/review/101010000001/r1-2.jpg",
+        "profileImage": null,
         "rating": 4,
-        "content": "디자인이 고급스럽고 잘 맞았어요.",
+        "content": "가성비가 좋네요. 식 잘 치웠습니다.",
         "createdAt": "2026-04-20",
         "image": "/images/product/101010000001/review/r-3.jpg"
+      },
+      {
+        "id": "r5",
+        "user": "예신202604",
+        "profileImage": null,
+        "rating": 4,
+        "content": "가성비가 좋네요. 식 잘 치웠습니다.",
+        "createdAt": "2026-04-20",
+        "image": null
+      },
+      {
+        "id": "r6",
+        "user": "도루묵",
+        "profileImage": null,
+        "rating": 4,
+        "content": "가성비가 좋네요. 식 잘 치웠습니다.",
+        "createdAt": "2026-04-20",
+        "image": null
+      },
+      {
+        "id": "r7",
+        "user": "도라지",
+        "profileImage": null,
+        "rating": 4,
+        "content": "가성비가 좋네요. 식 잘 치웠습니다.",
+        "createdAt": "2026-04-20",
+        "image": null
       }
     ]
   }
