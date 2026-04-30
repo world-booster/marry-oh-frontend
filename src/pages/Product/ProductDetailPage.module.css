@@ -225,14 +225,19 @@
 .optionSelectBox,
 .quantityBox {
   padding: 10px 0;
+  border-top: 1px solid var(--white-gray);
+}
+
+.quantityBox {
+  border: none;
 }
 
 .shippingBox label,
 .optionSelectBox label,
 .quantityBox label {
   display: block;
-  font-size: 13px;
-  margin-bottom: 6px;
+  font-size: 14px;
+  margin: 6px 0;
 
 }
 
@@ -241,7 +246,7 @@
 /*---PRODUCT MAIN*/
 .vendor {
   font-size: 13px;
-  color: #888;
+  color: var(--color-text-sub);
 }
 
 .productTitle {
@@ -285,28 +290,34 @@
 /*---SHIPPING*/
 .shippingBox {
   margin-top: 16px;
-  padding: 14px 16px;
-  background: #fafafa;
-  border: 1px solid #eee;
-  border-radius: 10px;
 }
 
-.shippingRow {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.label {
-  font-size: 13px;
-  color: #888;
-}
-
-.value {
+.shippingTable {
+  width: 100%;
+  border-collapse: collapse;
   font-size: 14px;
-  font-weight: 500;
-  color: #222;
 }
+
+.shippingTable th {
+  text-align: left;
+  width: 80px;
+  color: #666;
+  font-weight: 500;
+  padding: 8px 0;
+}
+
+.shippingTable td {
+  padding: 8px 0;
+  color: var(--color-text-main);
+}
+
+.shippingCondition {
+  color: var(--color-text-sub);
+  margin-left: 5px;
+  font-weight: var(--font-regular);
+}
+
+
 
 /*---OPTION*/
 .selectWrapper {
@@ -366,7 +377,7 @@
   justify-content: space-between;
   align-items: center;
   border-top: 1px solid #eee;
-  padding:20px 0;
+  padding: 20px 0;
 }
 
 .totalBox strong {
@@ -720,6 +731,50 @@
   }
 }
 
+
+/*-------------------------------배송환불정책 */
+.policyBox {
+  border: 1px solid var(--white-gray);
+  overflow: hidden;
+}
+
+/* 🔥 테이블 */
+.policyTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.policyTable tr {
+  border-bottom: 1px solid var(--white-gray);
+}
+
+.policyTable tr:last-child {
+  border-bottom: none;
+}
+
+.policyTable th {
+  width: 110px;
+  text-align: left;
+  color: var(--color-text-sub);
+  font-weight: 500;
+  padding: 10px 16px;
+  background: #fafafa;
+}
+
+.policyTable td {
+  padding: 10px 16px;
+  color: var(--color-text-main);
+}
+
+@media (min-width: 1024px) {
+  .policyTable {
+  font-size: 14px;
+  }
+  .policyTable th {
+    width: 150px;
+  }
+}
 
 
 

@@ -68,7 +68,7 @@ interface Props {
 export default function ProductDetailPage({ id }: Props) {
 
     /* 🔥 상태 */
-    const [tab, setTab] = useState<"detail" | "review" | "qna" | "shipping">("detail");
+    const [tab, setTab] = useState<"detail" | "review" | "qna" | "shipping" | "vendor">("detail");
     const [product, setProduct] = useState<ProductDetail | null>(null);
     const [quantity, setQuantity] = useState(1);
     const [selectedImage, setSelectedImage] = useState(0);
@@ -82,6 +82,7 @@ export default function ProductDetailPage({ id }: Props) {
     const qnaRef = useRef<HTMLDivElement>(null);
     const shippingRef = useRef<HTMLDivElement>(null);
     const reviewRef = useRef<HTMLDivElement>(null);
+    const vendorRef = useRef<HTMLDivElement>(null);
     const detailContentRef = useRef<HTMLDivElement>(null);
 
     const [sort, setSort] = useState<"latest" | "rating">("latest");
@@ -154,50 +155,6 @@ export default function ProductDetailPage({ id }: Props) {
         (_, i) => startPage + i
     );
 
-
-    const policy = product.baseShippingPolicy[0];
-    const regionFees = product.RegionShippingPolicy;
-
-    const getShippingText = (policy: any, regionFees: any[]) => {
-        if (!policy) return "";
-
-        const baseFee = policy.baseFee.toLocaleString();
-        const threshold = policy.freeThreshold?.toLocaleString();
-
-        let text = "";
-
-        // 1. 기본 정책
-        if (policy.type === "FREE") {
-            text = "무료배송";
-        }
-
-        if (policy.type === "FLAT") {
-            text = `${baseFee}원`;
-        }
-
-        if (policy.type === "CONDITIONAL") {
-            text = `${baseFee}원 (${threshold}원 이상 무료)`;
-        }
-
-        // 2. 지역 추가요금
-        if (regionFees?.length > 0) {
-            const extraText = regionFees
-                .map((f) => {
-                    if (f.regionType === "REMOTE") return `산간 +${f.extraFee.toLocaleString()}원`;
-                    if (f.regionType === "ISLAND") return `도서 +${f.extraFee.toLocaleString()}원`;
-                    return null;
-                })
-                .filter(Boolean)
-                .join(", ");
-
-            if (extraText) {
-                text += ` / ${extraText}`;
-            }
-        }
-
-        return text;
-    };
-
     return (
         <div className={styles.localContainer}>
             <div className={styles.layout}>
@@ -232,6 +189,10 @@ export default function ProductDetailPage({ id }: Props) {
                         </button>
                         <button onClick={() => handleTabClick("shipping", shippingRef)}
                             className={tab === "shipping" ? styles.active : ""}>
+                            배송/환불
+                        </button>
+                        <button onClick={() => handleTabClick("vendor", vendorRef)}
+                            className={tab === "vendor" ? styles.active : ""}>
                             배송/환불
                         </button>
                         <button onClick={() => handleTabClick("qna", qnaRef)}
@@ -365,10 +326,57 @@ export default function ProductDetailPage({ id }: Props) {
                         <div className="divider"></div>
                         <div ref={shippingRef} className={styles.section}>
                             <div className={styles.sectionTitle}>배송 및 환불 정책</div>
-                            <p>배송 및 환불 정책</p>
+                            <div className={styles.policyBox}>
+                                <table className={styles.policyTable}>
+                                    <tbody>
+                                        <tr>
+                                            <th>배송방법</th>
+                                            <td>택배 배송</td>
+                                        </tr>
+                                        <tr>
+                                            <th>배송비</th>
+                                            <td>무료배송 (도서산간 +3,000원 추가)</td>
+                                        </tr>
+                                        <tr>
+                                            <th>배송기간</th>
+                                            <td>결제 완료 후 2~5일 이내 발송</td>
+                                        </tr>
+                                        <tr>
+                                            <th>택배사</th>
+                                            <td>CJ대한통운</td>
+                                        </tr>
+                                        <tr>
+                                            <th>교환 및 환불</th>
+                                            <td>
+                                                <ul className={styles.list}>
+                                                    <li>상품 수령 후 7일 이내 신청 가능합니다.</li>
+                                                    <li>단순 변심 시 왕복 배송비는 고객 부담입니다.</li>
+                                                    <li>상품 불량/오배송의 경우 배송비는 판매자가 부담합니다.</li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>환불 불가 사유</th>
+                                            <td>
+                                                <ul>
+                                                    <li>1) 사용 흔적 또는 훼손된 경우</li>
+                                                    <li>2) 포장 훼손으로 상품 가치가 상실된 경우</li>
+                                                    <li>3) 맞춤 제작 상품</li>
+                                                    <li>4) 상품 수령 후 7일이 지난 경우</li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <th>안내</th>
+                                            <td>
+                                                상품 특성에 따라 배송 및 환불 정책이 일부 상이할 수 있습니다.
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
-
-
                         <div className="divider"></div>
                         <div ref={qnaRef} className={styles.section}>
                             <div className={styles.sectionTitle}>
@@ -398,6 +406,38 @@ export default function ProductDetailPage({ id }: Props) {
                                 </button>
                             </div>
                         </div>
+
+
+                        <div className="divider"></div>
+                        <div ref={vendorRef} className={styles.section}>
+                            <div className={styles.sectionTitle}>판매자정보</div>
+
+                            <div className={styles.policyBox}>
+                                <table className={styles.policyTable}>
+                                    <tbody>
+                                        <tr>
+                                            <th>상호명</th>
+                                            <td>마리오 웨딩 스튜디오</td>
+                                        </tr>
+                                        <tr>
+                                            <th>고객센터</th>
+                                            <td>02-1234-5678</td>
+                                        </tr>
+                                        <tr>
+                                            <th>주소</th>
+                                            <td>서울특별시 강남구 테헤란로 123, 10층</td>
+                                        </tr>
+                                        <tr>
+                                            <th>고객센터 운영시간</th>
+                                            <td>평일 10:00 ~ 18:00 (점심시간 12:00 ~ 13:00, 주말/공휴일 휴무)</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+
+
                     </div>
                 </div>
 
@@ -426,12 +466,16 @@ export default function ProductDetailPage({ id }: Props) {
                                 </div>
                             </div>
                             <div className={styles.shippingBox}>
-                                <div className={styles.shippingRow}>
-                                    <span className={styles.label}>배송</span>
-                                    <span className={styles.value}>
-                                        {getShippingText(policy, regionFees)}
-                                    </span>
-                                </div>
+                                <table className={styles.shippingTable}>
+                                    <tbody>
+                                        <tr>
+                                            <th>배송</th>
+                                            <td>무료배송
+                                                <span className={styles.shippingCondition}>(150,000원 이상 무료)</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                             <div className={styles.optionSelectBox}>
                                 <label>옵션 선택</label>
