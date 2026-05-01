@@ -1,0 +1,36 @@
+.container {
+  width: 100%;
+  max-width: 768px;
+  margin: 0 auto;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+/* 상단 영역 */
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+/* 글쓰기 버튼 영역 */
+.writeArea {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 12px;
+}
+
+/* 게시글 리스트 영역 */
+.listArea {
+  background: #fff;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
+
+/* 페이지네이션 영역 */
+.paginationArea {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}

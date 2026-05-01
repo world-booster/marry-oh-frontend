@@ -1,0 +1,18 @@
+.tags {
+  display: flex;
+  gap: 8px;
+}
+
+.tag {
+  padding: 6px 10px;
+  border-radius: 20px;
+  background: #f5f5f5;
+  font-size: 12px;
+  cursor: pointer;
+  border: none;
+}
+
+.active {
+  background: #222;
+  color: #fff;
+}

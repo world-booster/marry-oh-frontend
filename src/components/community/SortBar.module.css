@@ -1,0 +1,19 @@
+.sortBar {
+  display: flex;
+  gap: 8px;
+}
+
+.sortButton {
+  padding: 6px 10px;
+  border-radius: 16px;
+  border: 1px solid #ddd;
+  background: #fff;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.sortButton.active {
+  background: #222;
+  color: #fff;
+  border-color: #222;
+}

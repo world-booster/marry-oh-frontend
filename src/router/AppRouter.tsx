@@ -95,8 +95,9 @@ function getPageByType(type: string, params: UrlSegments) {
   switch (type) {
     case "product":
       return <ProductListPage {...params} />;
-    case "community":
+    case "community": {
       return <CommunityPage />;
+    }
     default:
       return notFound();
   }

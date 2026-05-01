@@ -1,0 +1,46 @@
+.postItem {
+  display: flex;
+  gap: 14px;
+  padding: 16px;
+  border-bottom: 1px solid #f2f2f2;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.postItem:hover {
+  background: #fafafa;
+}
+
+.thumbnail {
+  width: 72px;
+  height: 72px;
+  border-radius: 8px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #222;
+}
+
+.preview {
+  font-size: 13px;
+  color: #666;
+  line-height: 1.4;
+}
+
+.meta {
+  font-size: 12px;
+  color: #999;
+  display: flex;
+  gap: 10px;
+}
