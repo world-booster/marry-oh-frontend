@@ -1,6 +1,44 @@
 import { useEffect, useRef, useState } from "react";
-import styles from "./ProductDetailPage.module.css";
+import styles from "@/pages/Product/ProductDetailPage.module.css";
 import detail from "@/data/wedding/product/mockProductDetail.json";
+
+interface regionShippingItem {
+    id: string;
+    policyId: string;
+    regionType: string;
+    extraFee: number;
+}
+
+interface baseShippingItem {
+    id: string;
+    type: string;
+    baseFee: number;
+    freeThreshold: number;
+}
+
+interface OptionItem {
+    id: string;
+    label: string;
+    price: number;
+}
+
+interface QnaItem {
+    id: string;
+    isAnswered: boolean;
+    question: string;
+    answer: string;
+    user: string;
+    date: string;
+}
+interface ReviewItem {
+    id: string;
+    user: string;
+    profileImage: string | null;
+    rating: number;
+    content: string;
+    createdAt: string;
+    image: string | null;
+}
 
 interface ProductDetail {
     id: string;
@@ -14,6 +52,13 @@ interface ProductDetail {
     description: string;
     rating: number;
     reviewCount: number;
+    qnaCount: number;
+    qna: QnaItem[];
+    reviews: ReviewItem[];
+    isOptionRequired: boolean;
+    options?: OptionItem[];
+    baseShippingPolicy: baseShippingItem[];
+    RegionShippingPolicy: regionShippingItem[];
 }
 
 interface Props {
@@ -23,7 +68,7 @@ interface Props {
 export default function ProductDetailPage({ id }: Props) {
 
     /* 🔥 상태 */
-    const [tab, setTab] = useState<"detail" | "review" | "qna" | "shipping">("detail");
+    const [tab, setTab] = useState<"detail" | "review" | "qna" | "shipping" | "vendor">("detail");
     const [product, setProduct] = useState<ProductDetail | null>(null);
     const [quantity, setQuantity] = useState(1);
     const [selectedImage, setSelectedImage] = useState(0);
@@ -37,7 +82,17 @@ export default function ProductDetailPage({ id }: Props) {
     const qnaRef = useRef<HTMLDivElement>(null);
     const shippingRef = useRef<HTMLDivElement>(null);
     const reviewRef = useRef<HTMLDivElement>(null);
+    const vendorRef = useRef<HTMLDivElement>(null);
     const detailContentRef = useRef<HTMLDivElement>(null);
+
+    const [sort, setSort] = useState<"latest" | "rating">("latest");
+    const [reviewPage, setReviewPage] = useState(1);
+    const pageSize = 5;
+    const start = (reviewPage - 1) * pageSize;
+
+
+
+
 
     /* 🔥 데이터 로딩 */
     useEffect(() => {
@@ -58,16 +113,12 @@ export default function ProductDetailPage({ id }: Props) {
         };
 
         checkHeight(); // 초기 실행
-
-        // 🔥 이미지 로딩 완료 후 다시 측정
         const images = detailContentRef.current.querySelectorAll("img");
-
         images.forEach(img => {
             if (!img.complete) {
                 img.addEventListener("load", checkHeight);
             }
         });
-
         return () => {
             images.forEach(img => {
                 img.removeEventListener("load", checkHeight);
@@ -75,171 +126,392 @@ export default function ProductDetailPage({ id }: Props) {
         };
     }, [product]);
 
-    /* 🔥 탭 이동 */
     const handleTabClick = (
         key: typeof tab,
         ref: React.RefObject<HTMLDivElement | null>
     ) => {
         setTab(key);
         ref.current?.scrollIntoView({
-            behavior: "smooth",
+            behavior: "auto",
             block: "start",
         });
     };
 
-    /* 🔥 early return (Hook 이후!) */
+    useEffect(() => {
+        reviewRef.current?.scrollIntoView({ behavior: "auto" });
+    }, [reviewPage]);
+
     if (!product) return <div>상품을 찾을 수 없습니다.</div>;
 
     const thumbnails = product.thumbnails;
+    const currentReviews = product.reviews.slice(start, start + pageSize);
+    const totalPage = Math.ceil(product.reviews.length / pageSize);
+    const PAGE_SIZE = 5;
+    const startPage = Math.floor((reviewPage - 1) / PAGE_SIZE) * PAGE_SIZE + 1;
+    const endPage = Math.min(startPage + PAGE_SIZE - 1, totalPage);
+
+    const pages = Array.from(
+        { length: endPage - startPage + 1 },
+        (_, i) => startPage + i
+    );
 
     return (
-        <div className="contentsContainer">
-            <div className={styles.topSection}>
-
-                {/* 이미지 */}
-                <div className={styles.imageSection}>
-                    <div className={styles.thumbnailList}>
-                        {thumbnails.map((img, idx) => (
-                            <img
-                                key={idx}
-                                src={img}
-                                className={idx === selectedImage ? styles.thumbnailActive : styles.thumbnail}
-                                onClick={() => setSelectedImage(idx)}
-                            />
-                        ))}
-                    </div>
-
-                    <div className={styles.mainImage}>
-                        <img src={thumbnails[selectedImage] ?? thumbnails[0]} alt={product.title} />
+        <div className={styles.localContainer}>
+            <div className={styles.layout}>
+                <div className={styles.imageWrapper}>
+                    <div className={styles.imageBox}>
+                        <div className={styles.thumbnailList}>
+                            {thumbnails.map((img, idx) => (
+                                <img key={idx}
+                                    src={img}
+                                    className={idx === selectedImage ? styles.thumbnailActive : styles.thumbnail}
+                                    onClick={() => setSelectedImage(idx)}
+                                />
+                            ))}
+                        </div>
+                        <div className={styles.mainImage}>
+                            <img src={thumbnails[selectedImage] ?? thumbnails[0]} alt={product.title} />
+                        </div>
                     </div>
                 </div>
+                <div className={styles.detailWrapper}>
+                    <div className={styles.tabs}>
+                        <button onClick={() => handleTabClick("detail", detailRef)}
+                            className={tab === "detail" ? styles.active : ""}>
+                            상품정보
+                        </button>
+                        <button onClick={() => handleTabClick("review", reviewRef)}
+                            className={tab === "review" ? styles.active : ""}>
+                            리뷰
+                            {product.reviewCount >= 0 && (
+                                <span className={styles.countNumber}>{product.reviewCount}</span>
+                            )}
+                        </button>
+                        <button onClick={() => handleTabClick("shipping", shippingRef)}
+                            className={tab === "shipping" ? styles.active : ""}>
+                            배송/환불
+                        </button>
+                        <button onClick={() => handleTabClick("vendor", vendorRef)}
+                            className={tab === "vendor" ? styles.active : ""}>
+                            배송/환불
+                        </button>
+                        <button onClick={() => handleTabClick("qna", qnaRef)}
+                            className={tab === "qna" ? styles.active : ""}>
+                            문의
+                            {product.qnaCount >= 0 && (
+                                <span className={styles.countNumber}>{product.qnaCount}</span>
+                            )}
+                        </button>
+                    </div>
 
-                {/* 구매 영역 */}
-                <div className={styles.purchaseSection}>
-                    <div className="meta">
-                        <div className={styles.vendor}>{product.vendor}</div>
-                        <div className={styles.title}>{product.title}</div>
+                    <div className={styles.detailContent}>
+                        <div ref={detailRef} className={styles.section}>
+                            <div className={styles.sectionTitle}>상품정보</div>
+                            <div ref={detailContentRef}
+                                className={`${styles.detailContent} ${!isExpanded ? styles.collapsed : ""}`}                            >
+                                {product.detailImages.map((img, idx) => (
+                                    <img key={idx} src={img} className={styles.detailImage} />
+                                ))}
+                                <p>{product.description}</p>
+                            </div>
 
-                        <div className={styles.rating}>
-                            ⭐ {product.rating} <span>({product.reviewCount})</span>
-                        </div>
-
-                        <div className={styles.priceBox}>
-                            {product.discountRate > 0 && (
-                                <div className={styles.discountRow}>
-                                    <span className={styles.discount}>
-                                        {product.discountRate * 100}%
-                                    </span>
-                                    <span className={styles.originalPrice}>
-                                        {product.originalPrice.toLocaleString()}원
-                                    </span>
+                            {isOverflow && (
+                                <div className={styles.expandBox}>
+                                    <button className={styles.expandBtn}
+                                        onClick={() => {
+                                            setIsExpanded(v => !v);
+                                            if (isExpanded) {
+                                                detailRef.current?.scrollIntoView({ behavior: "smooth" });
+                                            }
+                                        }}
+                                    >
+                                        {isExpanded ? (
+                                            <div>접기 <i className="fas fa-chevron-up" /></div>
+                                        ) : (
+                                            <div>상품정보 더보기 <i className="fas fa-chevron-down" /></div>
+                                        )}
+                                    </button>
                                 </div>
                             )}
+                        </div>
 
-                            <div className={styles.finalPrice}>
-                                {product.finalPrice.toLocaleString()}
-                                <span className={styles.notBold}>원</span>
+                        <div className="divider"></div>
+
+                        <div ref={reviewRef} className={styles.section}>
+                            <div className={styles.sectionTitle}>
+                                리뷰
+                                {product.reviewCount >= 0 && (
+                                    <span className={styles.countNumber}>{product.reviewCount}</span>
+                                )}
+                            </div>
+                            <div className={styles.reviewSort}>
+                                <button
+                                    className={sort === "latest" ? styles.active : ""}
+                                    onClick={() => setSort("latest")}
+                                >
+                                    최신순
+                                </button>
+                                <button
+                                    className={sort === "rating" ? styles.active : ""}
+                                    onClick={() => setSort("rating")}
+                                >
+                                    평점순
+                                </button>
+                            </div>
+
+                            <div className={styles.reviewList}>
+                                {currentReviews.map((item) => (
+                                    <div key={item.id} className={styles.reviewItem}>
+                                        <div className={styles.reviewHeader}>
+                                            <div className={styles.userBox}>
+                                                <img
+                                                    src={item.profileImage ?? "/images/profile/default-profile.jpg"}
+                                                    alt="profile"
+                                                    className={styles.profile}
+                                                />
+                                                <div className={styles.userInfo}>
+                                                    <span className={styles.rating}>
+                                                        {Array.from({ length: 5 }).map((_, i) => (
+                                                            <span
+                                                                key={i}
+                                                                className={i < item.rating ? styles.filledStar : styles.emptyStar}
+                                                            >
+                                                                ★
+                                                            </span>
+                                                        ))}
+                                                    </span>
+
+                                                    <span className={styles.nickname}>{item.user}</span>
+                                                    <span className={styles.date}>{item.createdAt}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className={styles.reviewMain}>
+                                            <div className={styles.reviewContent}>{item.content}</div>
+                                            {item.image && (
+                                                <div className={styles.reviewImage}>
+                                                    <img src={item.image} alt="review" />
+                                                </div>
+                                            )}
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                            <div className={styles.pagination}>
+                                <button onClick={() => setReviewPage(1)} disabled={reviewPage === 1}>
+                                    <i className="fas fa-angles-left"></i>
+                                </button>
+                                <button onClick={() => setReviewPage(reviewPage - 1)} disabled={reviewPage === 1}>
+                                    <i className="fas fa-angle-left"></i>
+                                </button>
+
+                                {pages.map((p) => (
+                                    <button
+                                        key={p}
+                                        className={`${styles.pageNumber} ${reviewPage === p ? styles.active : ""}`}
+                                        onClick={() => setReviewPage(p)}
+                                    >
+                                        {p}
+                                    </button>
+                                ))}
+                                <button onClick={() => setReviewPage(reviewPage + 1)} disabled={reviewPage === totalPage}>
+                                    <i className="fas fa-angle-right"></i>
+                                </button>
+                                <button onClick={() => setReviewPage(totalPage)} disabled={reviewPage === totalPage}>
+                                    <i className="fas fa-angles-right"></i>
+                                </button>
                             </div>
                         </div>
 
-                        {/* 옵션 */}
-                        <div className={styles.optionSelectBox}>
-                            <label>옵션 선택</label>
-                            <select>
-                                <option>기본 옵션</option>
-                                <option>테스트 옵션</option>
-                            </select>
+                        <div className="divider"></div>
+                        <div ref={shippingRef} className={styles.section}>
+                            <div className={styles.sectionTitle}>배송 및 환불 정책</div>
+                            <div className={styles.policyBox}>
+                                <table className={styles.policyTable}>
+                                    <tbody>
+                                        <tr>
+                                            <th>배송방법</th>
+                                            <td>택배 배송</td>
+                                        </tr>
+                                        <tr>
+                                            <th>배송비</th>
+                                            <td>무료배송 (도서산간 +3,000원 추가)</td>
+                                        </tr>
+                                        <tr>
+                                            <th>배송기간</th>
+                                            <td>결제 완료 후 2~5일 이내 발송</td>
+                                        </tr>
+                                        <tr>
+                                            <th>택배사</th>
+                                            <td>CJ대한통운</td>
+                                        </tr>
+                                        <tr>
+                                            <th>교환 및 환불</th>
+                                            <td>
+                                                <ul className={styles.list}>
+                                                    <li>상품 수령 후 7일 이내 신청 가능합니다.</li>
+                                                    <li>단순 변심 시 왕복 배송비는 고객 부담입니다.</li>
+                                                    <li>상품 불량/오배송의 경우 배송비는 판매자가 부담합니다.</li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>환불 불가 사유</th>
+                                            <td>
+                                                <ul>
+                                                    <li>1) 사용 흔적 또는 훼손된 경우</li>
+                                                    <li>2) 포장 훼손으로 상품 가치가 상실된 경우</li>
+                                                    <li>3) 맞춤 제작 상품</li>
+                                                    <li>4) 상품 수령 후 7일이 지난 경우</li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <th>안내</th>
+                                            <td>
+                                                상품 특성에 따라 배송 및 환불 정책이 일부 상이할 수 있습니다.
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div className="divider"></div>
+                        <div ref={qnaRef} className={styles.section}>
+                            <div className={styles.sectionTitle}>
+                                문의
+                                {product.qnaCount >= 0 && (
+                                    <span className={styles.countNumber}>{product.qnaCount}</span>
+                                )}
+                            </div>
+                            <div className={styles.qnaList}>
+                                {product.qna.map((item) => (
+                                    <div key={item.id} className="card textOnly">
+                                        <div className="meta">
+                                            <span>
+                                                [{item.isAnswered === true ? "답변완료" : "답변대기"}]
+                                            </span>
+                                            <div className={styles.qnaTitle}>{item.question}</div>
+                                            <div className="nickname">{item.user} · {item.date}</div>
+                                        </div>
+                                        <div className="content">{item.answer}</div>
+                                    </div>
+                                ))}
+                            </div>
+
+                            <div className={styles.moreWrapper}>
+                                <button className={styles.moreBtn}> 문의 더보기
+                                    <i className="fas fa-chevron-right"></i>
+                                </button>
+                            </div>
                         </div>
 
-                        {/* 수량 */}
-                        <div className={styles.quantityWrapper}>
-                            <span>수량</span>
+
+                        <div className="divider"></div>
+                        <div ref={vendorRef} className={styles.section}>
+                            <div className={styles.sectionTitle}>판매자정보</div>
+
+                            <div className={styles.policyBox}>
+                                <table className={styles.policyTable}>
+                                    <tbody>
+                                        <tr>
+                                            <th>상호명</th>
+                                            <td>마리오 웨딩 스튜디오</td>
+                                        </tr>
+                                        <tr>
+                                            <th>고객센터</th>
+                                            <td>02-1234-5678</td>
+                                        </tr>
+                                        <tr>
+                                            <th>주소</th>
+                                            <td>서울특별시 강남구 테헤란로 123, 10층</td>
+                                        </tr>
+                                        <tr>
+                                            <th>고객센터 운영시간</th>
+                                            <td>평일 10:00 ~ 18:00 (점심시간 12:00 ~ 13:00, 주말/공휴일 휴무)</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+
+                <div className={styles.purchaseWrapper}>
+                    <div className={styles.purchaseBox}>
+                        <div className="meta">
+                            <div className={styles.vendor}>{product.vendor}</div>
+                            <div className={styles.productTitle}>{product.title}</div>
+                            <div>
+                                <span className={styles.filledStar}>★</span>
+                                <span className={styles.rating}>{product.rating} ({product.reviewCount})</span>
+                            </div>
+                            <div className={styles.priceBox}>
+                                {product.discountRate > 0 && (
+                                    <div className={styles.discountRow}>
+                                        <span className={styles.discount}>
+                                            {product.discountRate * 100}%
+                                        </span>
+                                        <span className={styles.originalPrice}>
+                                            {product.originalPrice.toLocaleString()}원
+                                        </span>
+                                    </div>
+                                )}
+                                <div className={styles.finalPrice}>
+                                    {product.finalPrice.toLocaleString()}원
+                                </div>
+                            </div>
+                            <div className={styles.shippingBox}>
+                                <table className={styles.shippingTable}>
+                                    <tbody>
+                                        <tr>
+                                            <th>배송</th>
+                                            <td>무료배송
+                                                <span className={styles.shippingCondition}>(150,000원 이상 무료)</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div className={styles.optionSelectBox}>
+                                <label>옵션 선택</label>
+                                <div className={styles.selectWrapper}>
+                                    <select>
+                                        <option>옵션 추가</option>
+                                        <option>프리미엄 옵션 (+10,000원)</option>
+                                    </select>
+                                    <i className="fas fa-chevron-down"></i>
+                                </div>
+                            </div>
                             <div className={styles.quantityBox}>
-                                <button onClick={() => setQuantity(q => Math.max(1, q - 1))}>-</button>
-                                <span>{quantity}</span>
-                                <button onClick={() => setQuantity(q => q + 1)}>+</button>
+                                <label>수량</label>
+                                <div className={styles.quantityWrapper}>
+                                    <button type="button">
+                                        <i className="fas fa-minus"></i>
+                                    </button>
+                                    <span>{quantity}</span>
+                                    <button type="button">
+                                        <i className="fas fa-plus"></i>
+                                    </button>
+                                </div>
                             </div>
-                        </div>
+                            <div className={styles.totalBox}>
+                                <label>총 금액</label>
+                                <strong>{(product.finalPrice * quantity).toLocaleString()}원</strong>
+                            </div>
 
-                        {/* 총 금액 */}
-                        <div className={styles.totalBox}>
-                            <span>총 상품 금액</span>
-                            <strong>
-                                {(product.finalPrice * quantity).toLocaleString()}원
-                            </strong>
-                        </div>
+                            <div className={styles.actions}>
+                                <button className={styles.cartBtn}>장바구니</button>
+                                <button className={styles.buyBtn}>구매하기</button>
+                            </div>
 
-                        {/* 버튼 */}
-                        <div className={styles.actions}>
-                            <button className={styles.cartBtn}>장바구니</button>
-                            <button className={styles.buyBtn}>구매하기</button>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            {/* 탭 */}
-            <div className={styles.tabs}>
-                <button onClick={() => handleTabClick("detail", detailRef)} className={tab === "detail" ? styles.active : ""}>상품정보</button>
-                <button onClick={() => handleTabClick("qna", qnaRef)} className={tab === "qna" ? styles.active : ""}>문의</button>
-                <button onClick={() => handleTabClick("shipping", shippingRef)} className={tab === "shipping" ? styles.active : ""}>배송/환불</button>
-                <button onClick={() => handleTabClick("review", reviewRef)} className={tab === "review" ? styles.active : ""}>리뷰</button>
-            </div>
-
-            {/* 컨텐츠 */}
-            <div className={styles.content}>
-
-                {/* 상세 */}
-                <div ref={detailRef} className={styles.section}>
-                    <div>상품정보</div>
-
-                    <div
-                        ref={detailContentRef}
-                        className={`${styles.detailContent} ${!isExpanded ? styles.collapsed : ""}`}
-                    >
-                        {product.detailImages.map((img, idx) => (
-                            <img key={idx} src={img} className={styles.detailImage} />
-                        ))}
-
-                        <p>{product.description}</p>
-                    </div>
-
-                    {isOverflow && (
-                        <div className={styles.expandBox}>
-                            <button
-                                className={styles.expandBtn}
-                                onClick={() => {
-                                    setIsExpanded(v => !v);
-
-                                    if (isExpanded) {
-                                        detailRef.current?.scrollIntoView({ behavior: "smooth" });
-                                    }
-                                }}
-                            >
-                                {isExpanded ? "접기" : "상품정보 더보기"}
-                            </button>
-                        </div>
-                    )}
-                </div>
-
-                {/* 문의 */}
-                <div ref={qnaRef} className={styles.section}>
-                    <div>문의</div>
-                    <p>문의 내용 영역</p>
-                </div>
-
-                {/* 배송 */}
-                <div ref={shippingRef} className={styles.section}>
-                    <div>배송 및 환불 정책</div>
-                    <p>배송 및 환불 정책</p>
-                </div>
-
-                {/* 리뷰 */}
-                <div ref={reviewRef} className={styles.section}>
-                    <div>리뷰</div>
-                    <p>리뷰 목록</p>
-                </div>
-
             </div>
         </div>
     );

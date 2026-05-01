@@ -1,133 +1,265 @@
-.topSection {
+/*-------------------------------LAYOUT*/
+.localContainer {
+  padding: 0px 15px;
+}
+
+.layout {
   display: flex;
   flex-direction: column;
-  gap: 20px;
 }
 
-.section {
-  scroll-margin-top: 80px;
+.imageWrapper {
+  order: 1;
 }
 
+.purchaseWrapper {
+  order: 2;
+}
+
+.detailWrapper {
+  order: 3;
+}
+
+.sticky {
+  position: static;
+}
+
+.imageBox,
+.detailBox,
+.purchaseBox {
+  padding-top: 10px;
+}
+
+
+
+
+/* PC */
 @media (min-width: 1024px) {
-  .topSection {
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 40px;
-    justify-content: space-between;
+  .localContainer {
+    padding: 0;
+  }
+
+  .layout {
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    grid-template-areas:
+      "image purchase"
+      "detail .";
+    align-items: start;
+  }
+
+  .imageWrapper {
+    grid-area: image;
+  }
+
+  .detailWrapper {
+    grid-area: detail;
+  }
+
+  .purchaseWrapper {
+    grid-area: purchase;
+    align-self: start;
+    position: sticky;
+    top: 100px;
+  }
+
+  .purchaseBox {
+    margin-left: 30px;
+  }
+
+  .imageWrapper,
+  .detailWrapper {
+    border-right: 1px solid var(--white-gray);
+  }
+
+  .imageBox,
+  .detailBox,
+  .purchaseBox {
+    padding: 40px 0 20px 0;
   }
 }
 
+
+/*-------------------------------SECTION*/
+.section {
+  scroll-margin-top: 80px;
+  margin-bottom: 70px;
+}
+
+.sectionTitle {
+  font-size: 16px;
+  font-weight: var(--font-bold);
+  margin: 20px 0 10px 0;
+  color: var(--color-text-main);
+}
+
+@media (min-width:1024px) {
+  .section {
+    padding-right: 30px;
+  }
+
+}
+
+
+
 /*-------------------------------IMAGE*/
-.imageSection {
+.imageWrapper {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 16px;
+  align-items: center;
+}
+
+.imageBox {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+/* 메인 이미지 */
+.mainImage {
+  width: 100%;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #f7f7f7;
 }
 
 .mainImage img {
   width: 100%;
-  border-radius: 12px;
   aspect-ratio: 1 / 1;
   object-fit: cover;
+  transition: transform 0.3s ease;
 }
 
 .thumbnailList {
   display: flex;
   gap: 8px;
   overflow-x: auto;
+  padding: 4px;
+}
+
+.thumbnailList::-webkit-scrollbar {
+  display: none;
 }
 
 .thumbnail,
 .thumbnailActive {
-  width: 60px;
-  height: 60px;
+  width: 64px;
+  height: 64px;
   object-fit: cover;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
-  border: 1px solid #ddd;
   flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.thumbnail {
+  border: 1px solid #e5e5e5;
+  opacity: 0.7;
+}
+
+.thumbnail:hover {
+  opacity: 1;
 }
 
 .thumbnailActive {
   border: 2px solid var(--color-primary);
+  opacity: 1;
+  transform: scale(1.05);
 }
 
+/*-------------------------------PC*/
 @media (min-width: 1024px) {
-  .topSection {
+  .imageWrapper {
     flex-direction: row;
+    justify-content: center;
     align-items: flex-start;
-    gap: 40px;
-    justify-content: space-between;
+    gap: 24px;
   }
 
-  .imageSection {
+  /* 🔥 핵심: 썸네일 + 메인이미지 가로 배치 */
+  .imageBox {
     flex-direction: row;
-    align-items: flex-start;
-    gap: 15px;
+    gap: 16px;
+    width: 85%;
   }
 
+  /* 👉 썸네일 세로 */
   .thumbnailList {
     flex-direction: column;
     width: 80px;
+    gap: 10px;
+    overflow: visible;
+    padding: 0;
+    margin: 0;
   }
 
   .thumbnail,
   .thumbnailActive {
-    width: 70px;
-    height: 70px;
+    width: 72px;
+    height: 72px;
   }
 
+  /* 👉 메인이미지 크게 */
   .mainImage {
     flex: 1;
-    max-width: 500px;
+    border-radius: 10px;
+  }
+
+  .mainImage img {
+    border-radius: 10px;
+  }
+
+  /* 👉 구분선 */
+  .imageWrapper {
+    padding-right: 30px;
+    border-right: 1px solid #f0f0f0;
   }
 }
 
 
 /*-------------------------------PURCHASE SECTION*/
-.purchaseSection {
-  width: 100%;
+/*---LAYOUT*/
+.shippingBox,
+.optionSelectBox,
+.quantityBox {
+  padding: 10px 0;
+  border-top: 1px solid var(--white-gray);
 }
 
-.infoBox {
-  border: 1px solid #eee;
-  padding: 16px;
-  border-radius: 12px;
-  background: white;
+.quantityBox {
+  border: none;
 }
 
+.shippingBox label,
+.optionSelectBox label,
+.quantityBox label {
+  display: block;
+  font-size: 14px;
+  margin: 6px 0;
+
+}
+
+@media (min-width: 1024px) {}
+
+/*---PRODUCT MAIN*/
 .vendor {
   font-size: 13px;
-  color: #888;
+  color: var(--color-text-sub);
 }
 
-.title {
+.productTitle {
   font-size: 18px;
   font-weight: 600;
-}
-
-.rating {
-  font-size: 13px;
-  margin-bottom: 10px;
-}
-
-.rating span {
-  color: #888;
-  margin-left: 4px;
 }
 
 .priceBox {
   display: flex;
   align-items: flex-start;
   gap: 8px;
-  margin-bottom: 16px;
   display: flex;
   flex-direction: column;
-}
-
-.price {
-  font-size: 20px;
-  font-weight: bold;
 }
 
 .discountRow {
@@ -145,66 +277,87 @@
 
 .originalPrice {
   font-size: 17px;
-  color: #aaa;
+  color: var(--color-text-muted);
   text-decoration: line-through;
 }
 
 .finalPrice {
   font-size: 26px;
   font-weight: 700;
-  color: #111;
+  color: var(--color-text-main);
 }
 
-.optionSelectBox {
-  margin-bottom: 16px;
-  position: relative;
+/*---SHIPPING*/
+.shippingBox {
+  margin-top: 16px;
 }
 
-.optionSelectBox label {
-  display: block;
-  font-size: 13px;
-  margin-bottom: 6px;
-}
-
-.optionSelectBox select {
+.shippingTable {
   width: 100%;
-  height: 40px;
-  padding: 0 32px 0 10px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  background: white;
-  font-size: 13px;
-  cursor: pointer;
-  appearance: none;
+  border-collapse: collapse;
+  font-size: 14px;
 }
 
-.optionSelectBox::after {
-  content: "";
+.shippingTable th {
+  text-align: left;
+  width: 80px;
+  color: #666;
+  font-weight: 500;
+  padding: 8px 0;
+}
+
+.shippingTable td {
+  padding: 8px 0;
+  color: var(--color-text-main);
+}
+
+.shippingCondition {
+  color: var(--color-text-sub);
+  margin-left: 5px;
+  font-weight: var(--font-regular);
+}
+
+
+
+/*---OPTION*/
+.selectWrapper {
+  position: relative;
+  margin-top: 6px;
+}
+
+.selectWrapper select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  appearance: none;
+  background: white;
+  font-size: 14px;
+}
+
+.selectWrapper i {
   position: absolute;
   right: 10px;
-  top: calc(50% + 10px);
-  width: 6px;
-  height: 6px;
-  border-right: 2px solid #666;
-  border-bottom: 2px solid #666;
-  transform: translateY(-50%) rotate(45deg);
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888;
   pointer-events: none;
 }
 
-.quantityWrapper {
+/*---QUANTITY*/
+.quantityBox {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
 }
 
-.quantityBox {
+.quantityWrapper {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-.quantityBox button {
+.quantityWrapper button {
   width: 32px;
   height: 32px;
   border: 1px solid #ddd;
@@ -213,18 +366,18 @@
   cursor: pointer;
 }
 
-.quantityBox span {
+.quantityWrapper span {
   min-width: 20px;
   text-align: center;
 }
 
+/*---TOTAL*/
 .totalBox {
   display: flex;
   justify-content: space-between;
   align-items: center;
   border-top: 1px solid #eee;
-  padding-top: 12px;
-  margin-bottom: 16px;
+  padding: 20px 0;
 }
 
 .totalBox strong {
@@ -258,18 +411,10 @@
   font-weight: 600;
 }
 
+
+
 @media (min-width: 1024px) {
-  .purchaseSection {
-    width: 380px;
-  }
-
-  .infoBox {
-    position: sticky;
-    top: 100px;
-    padding: 20px;
-  }
-
-  .title {
+  .productTitle {
     font-size: 22px;
   }
 
@@ -279,7 +424,9 @@
 }
 
 
-/*-------------------------------TABS*/
+
+/*-------------------------------DEATAIL*/
+/*---TABS*/
 .tabs {
   display: flex;
   justify-content: space-between;
@@ -294,6 +441,7 @@
   border: none;
   font-size: 14px;
   cursor: pointer;
+  color: var(--color-text-main);
 }
 
 .tabs button.active {
@@ -301,91 +449,10 @@
   font-weight: bold;
 }
 
-/* 내용 */
-.content {
-  padding: 20px 0;
-  font-size: 14px;
-  line-height: 1.6;
-}
-
-.detailImage {
-  width: 100%;
-  margin-bottom: 12px;
-  border-radius: 8px;
-}
-
-.detailContent {
-  position: relative;
-  overflow: hidden;
-}
-
-.collapsed {
-  max-height: 900px;
-}
-
-.collapsed::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 180px;
-  pointer-events: none;
-  background: linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0.6) 40%,
-    rgba(255, 255, 255, 0.9) 70%,
-    rgba(255, 255, 255, 1) 100%
-  );
-}
-
-.expandBox {
-  margin-top: -30px;
-  /* 🔥 위로 겹치게 */
-  position: relative;
-  z-index: 2;
-}
-
-
-/* 🔥 버튼 */
-.expandBtn {
-  min-width: 160px;
-  height: 44px;
-
-  border-radius: 999px;
-  border: 1px solid #e5e5e5;
-
-  background: white;
-  color: #333;
-  font-size: 14px;
-  font-weight: 600;
-
-  cursor: pointer;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-
-  transition: all 0.25s ease;
-}
-
-/* hover */
-.expandBtn:hover {
-  border-color: var(--color-primary);
+.countNumber {
+  padding-left: 3px;
   color: var(--color-primary);
-  transform: translateY(-1px);
 }
-
-/* active */
-.expandBtn:active {
-  transform: translateY(0);
-}
-
-
 
 @media (min-width: 1024px) {
   .tabs {
@@ -399,7 +466,397 @@
   }
 }
 
-/*-------------------------------COMMON*/
-.notBold {
-  font-weight: var(--font-regular);
+/*---DETAIL*/
+.detailContent {
+  font-size: 14px;
+  line-height: 1.6;
+  position: relative;
+  overflow: hidden;
+}
+
+.detailImage {
+  width: 100%;
+  margin-bottom: 12px;
+  border-radius: 8px;
+}
+
+
+.collapsed {
+  max-height: 900px;
+}
+
+.collapsed::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 180px;
+  pointer-events: none;
+  background: linear-gradient(to bottom,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.6) 40%,
+      rgba(255, 255, 255, 0.9) 70%,
+      rgba(255, 255, 255, 1) 100%);
+}
+
+.expandBox {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.expandBtn,
+.moreBtn {
+  min-width: 160px;
+  height: 44px;
+  border-radius: 10px;
+  border: 1px solid #e5e5e5;
+  background: white;
+  color: var(--color-text-main);
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 16px;
+  font-size: 14px;
+}
+
+.expandBtn:hover,
+.moreBtn:hover {
+  background-color: var(--ivory);
+}
+
+.expandBtn:active {
+  transform: translateY(0);
+}
+
+@media (min-width: 1024px) {
+  .detailContent {
+    padding-right: 0px;
+  }
+
+
+  .expandBtn,
+  .moreBtn {
+    padding: 12px 24px;
+    font-size: 16px;
+    margin-top: 25px;
+  }
+
+}
+
+
+/*---REVIEW*/
+.reviewSort {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.reviewSort button {
+  background: none;
+  border: none;
+  font-size: 13px;
+  color: #999;
+  cursor: pointer;
+}
+
+.reviewSort .active {
+  color: var(--color-text-main);
+  font-weight: 600;
+}
+
+.reviewList {
+  display: flex;
+  flex-direction: column;
+}
+
+.reviewItem {
+  padding: 14px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.reviewHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 6px;
+}
+
+.userBox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.profile {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.nickname {
+  font-size: 13px;
+  color: #333;
+}
+
+.date {
+  font-size: 11px;
+  color: #999;
+}
+
+.rating {
+  font-size: 13px;
+  color: var(--color-text-main);
+}
+
+.filledStar {
+  color: var(--color-primary);
+}
+
+.emptyStar {
+  color: #ddd;
+}
+
+.reviewContent {
+  font-size: 13px;
+  color: #333;
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+
+.reviewImage img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.reviewItem:last-child {
+  border-bottom: none;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+.pagination button {
+  min-width: 28px;
+  height: 28px;
+  padding: 0 6px;
+  font-size: 12px;
+  color: var(--color-text-sub);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pagination .active {
+  background: var(--color-primary);
+  color: #fff;
+  font-weight: 600;
+}
+
+.pagination button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.pageNumber {
+  border: 1px solid #ddd;
+  background: #fff;
+  border-radius: 5px;
+  color: #333;
+}
+
+@media (min-width: 1024px) {
+  .reviewSort {
+    gap: 14px;
+  }
+
+  .reviewSort button {
+    font-size: 14px;
+  }
+
+  .reviewHeader {
+    font-size: 13px;
+  }
+
+  .reviewMain {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+  }
+
+  .reviewContent {
+    width: 550px;
+    font-size: 14px;
+  }
+
+  .rating {
+    font-size: 14px;
+  }
+
+  .pagination {
+    gap: 8px;
+    margin-top: 20px;
+  }
+
+  .pagination button {
+    min-width: 34px;
+    height: 34px;
+    font-size: 14px;
+  }
+
+  .pagination button:hover:not(:disabled) {
+    filter: brightness(0.9);
+  }
+}
+
+
+/*-------------------------------배송환불정책 */
+.policyBox {
+  border: 1px solid var(--white-gray);
+  overflow: hidden;
+}
+
+/* 🔥 테이블 */
+.policyTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.policyTable tr {
+  border-bottom: 1px solid var(--white-gray);
+}
+
+.policyTable tr:last-child {
+  border-bottom: none;
+}
+
+.policyTable th {
+  width: 110px;
+  text-align: left;
+  color: var(--color-text-sub);
+  font-weight: 500;
+  padding: 10px 16px;
+  background: #fafafa;
+}
+
+.policyTable td {
+  padding: 10px 16px;
+  color: var(--color-text-main);
+}
+
+@media (min-width: 1024px) {
+  .policyTable {
+  font-size: 14px;
+  }
+  .policyTable th {
+    width: 150px;
+  }
+}
+
+
+
+/*-------------------------------문의*/
+.qnaList {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin-bottom: 30px
+}
+
+.qnaCard {
+  border: 1px solid #eee;
+  border-radius: 10px;
+  background: #fff;
+  padding: 12px;
+  cursor: pointer;
+}
+
+.qnaHeader {
+  cursor: pointer;
+}
+
+.qnaTitle {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.qnaMeta {
+  margin-top: 4px;
+  font-size: 12px;
+  color: #999;
+}
+
+/* 답변 */
+.qnaBody {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid #f0f0f0;
+  font-size: 13px;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* 더보기 */
+.moreWrapper {
+  display: flex;
+  justify-content: center;
+}
+
+/* PC 3열 */
+@media (min-width: 1024px) {
+  .qnaList {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .qnaCard {
+    padding: 16px;
+    transition: box-shadow 0.2s;
+  }
+
+  .qnaCard:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+
+  .qnaTitle {
+    font-size: 15px;
+  }
+
+  .qnaBody {
+    font-size: 14px;
+  }
+
+
+
+  /*-------------------------------COMMON*/
+  .notBold {
+    font-weight: var(--font-regular);
+  }
 }
